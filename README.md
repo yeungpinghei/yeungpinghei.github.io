@@ -35,6 +35,20 @@ In this dataset each row is an F0 measurement, with columns:
 ## h2 Heading
 ### h3 Heading
 
+In this dataset each row is a vowel token, with columns:
+
+-   `F1_50` and `F2_50`: F1 and F2, taken at the midpoint measured in
+    Hz,
+-   `Vowel`: Wells lexical set labels for New Zealand English
+    monophthongs,
+-   `yob`: participant year of birth (our time variable),
+-   `Speech_rate`: the average speech rate of the participant across the
+    recording (a control variable),
+-   `Speaker`: a code indicating which speaker the token comes from
+    (sometimes useful as a random effect), and
+-   `Gender`: the gender of the speaker (in this case, an `M`/`F`
+    binary).
+
 ## Horizontal Rules
 
 **This is bold text**
