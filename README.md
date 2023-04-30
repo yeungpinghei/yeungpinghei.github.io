@@ -18,6 +18,20 @@ This tutorial is based on Wieling (2018).
 I don't know what I'm doing.
 :::
 
+---
+title: "Linguistics Methods Hub"
+license: "CC-BY-SA 4.0"
+date: 2022-10-5
+citation: 
+  editor:
+    - name:
+        given: Josef 
+        family: Fruehwald
+    - name:
+        given: Matt Hunt 
+        family: Gardner
+---
+
 ## A brief introduction of the data
 In this dataset each row is an F0 measurement, with columns:
 
