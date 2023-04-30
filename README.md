@@ -1,7 +1,17 @@
-# An introduction to Generalised Mixed Models (GAMMs)
+# An introduction to Generalised Additive Mixed Models (GAMMs)
 
+In this tutorial, you will learn the basics of generalized additive mixed modelling (GAMM).
+
+It is a very useful tatistical tool to analyze dynamic data in sociophonetics.
+Plenty of recent studies have made use of GAMM to analyze vowel formants, pitch, articulatory measurements, etc.
+In this tutorial, I will show you a step-by-step guide on how GAMM works using my data on Hong Kong English as an example.
+# I will present my findings at ICPhS 2023.
+# If you want to know more about my study, click here to read the conference paper.
+# (Yeung, 2023)
 Compare the pitch production between speakers of American English and Hong Kong English.
 This tutorial is based on Wieling (2018).
+
+## A brief introduction of the data
 
 
 ## h2 Heading
