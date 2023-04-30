@@ -1,4 +1,9 @@
-# h1 Heading
+# An introduction to Generalised Mixed Models (GAMMs)
+
+Compare the pitch production between speakers of American English and Hong Kong English.
+This tutorial is based on Wieling (2018).
+
+
 ## h2 Heading
 ### h3 Heading
 
@@ -19,6 +24,8 @@ _This is italic text_
 > Blockquotes can also be nested...
 >> ...by using additional greater-than signs right next to each other...
 > > > ...or with spaces between arrows.
+
+
 
 
 ## Introduction
