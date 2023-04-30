@@ -29,7 +29,7 @@ author:
     affiliations:
       - "Georgetown University"
 date: '04/30/2023'
-license: "???"
+license: "CC-BY-SA-4.0"
 format:
     html: default
     pdf: default
