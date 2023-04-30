@@ -35,19 +35,59 @@ In this dataset each row is an F0 measurement, with columns:
 ## h2 Heading
 ### h3 Heading
 
-In this dataset each row is a vowel token, with columns:
+### Setup
 
--   `F1_50` and `F2_50`: F1 and F2, taken at the midpoint measured in
-    Hz,
--   `Vowel`: Wells lexical set labels for New Zealand English
-    monophthongs,
--   `yob`: participant year of birth (our time variable),
--   `Speech_rate`: the average speech rate of the participant across the
-    recording (a control variable),
--   `Speaker`: a code indicating which speaker the token comes from
-    (sometimes useful as a random effect), and
--   `Gender`: the gender of the speaker (in this case, an `M`/`F`
-    binary).
+We're going to fit these models with a small subset of the data from the
+[Origins of New Zealand English
+(ONZE)](https://www.canterbury.ac.nz/nzilbb/research/onze/) corpus. This
+dataset contains first and second formant data for 100 speakers of New
+Zealand English (for details see [supplementaries for Brand et al.
+2021](https://osf.io/q4j29/)). The data can be found
+[here](anon_ONZE_mean_sample.rds){target="_blank"}.
+
+For the purposes of this post any similar data set would be fine. We
+need:
+
+-   first and second formant data,
+-   a range of vowels (we'll only look at monophthongs here),
+-   a time variables (whether year of birth, age category, or time
+    through recording), and
+-   any variables you wish to control for.
+
+Let's [load the libraries](renv.lock){target="_blank"} we will use and
+have a look at the data.
+
+``` r
+# Load renv environment
+renv::use(lockfile = "renv.lock")
+```
+
+```{r}
+#| include: false
+renv::use(lockfile = "renv.lock")
+```
+
+```{r}
+#| message: false
+# Load tidyverse and friends.
+library(tidyverse)
+library(gganimate)
+
+# mgcv will be used for fitting gamms later and itsadug for visualisation
+library(mgcv)
+library(itsadug)
+
+# kable for displaying the dataset.
+library(kableExtra)
+
+vowels <- read_rds('anon_ONZE_mean_sample.rds')
+
+vowels %>%
+  head(10) %>%
+  kable() %>%
+  kable_styling(font_size = 11) %>%
+  scroll_box(width = "100%")
+```
 
 ## Horizontal Rules
 
