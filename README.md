@@ -1,18 +1,36 @@
 # An introduction to Generalised Additive Mixed Models (GAMMs)
 
+## What is GAMM?
+
+
 In this tutorial, you will learn the basics of generalized additive mixed modelling (GAMM).
 
 It is a very useful tatistical tool to analyze dynamic data in sociophonetics.
 Plenty of recent studies have made use of GAMM to analyze vowel formants, pitch, articulatory measurements, etc.
 In this tutorial, I will show you a step-by-step guide on how GAMM works using my data on Hong Kong English as an example.
-# I will present my findings at ICPhS 2023.
-# If you want to know more about my study, click here to read the conference paper.
-# (Yeung, 2023)
+I will present my findings at ICPhS 2023.
+If you want to know more about my study, click here to read the conference paper.
+(Yeung, 2023)
 Compare the pitch production between speakers of American English and Hong Kong English.
 This tutorial is based on Wieling (2018).
 
 ## A brief introduction of the data
+In this dataset each row is an F0 measurement, with columns:
 
+- `speaker`:  a unique code for each individual speaker
+- `variety`: the English variety spoken by the participant (American English or Hong Kong English)
+- `age`: the age of individual speakers
+- `gender`: the gender of individual speakers
+- `word`: the word from which the measurement was taken
+- `duration`: duration (in seconds) of the target word
+- `repetition`: each target word was repeated three times (1-3)
+- `point`: 9 equidistant F0 measurements were made at the 10%-90% intervals of the target words (1-9)
+- `F0`: the raw F0 measurements from Praat
+- `semitone`: pitch converted from F0 to semitone
+- `token`: the three columns `speaker`, `word`, and `repetition` combined into one
+- `semitone.norm`: the F0 measurements converted to semitones and z-score normalized by speaker
+-  `cat`: the syntactic category of the target word (content word or function word)
+- `adjacent`: the onset and coda consonants of the target word
 
 ## h2 Heading
 ### h3 Heading
@@ -117,19 +135,7 @@ vowels %>%
   scroll_box(width = "100%")
 ```
 
-In this dataset each row is a vowel token, with columns:
 
--   `F1_50` and `F2_50`: F1 and F2, taken at the midpoint measured in
-    Hz,
--   `Vowel`: Wells lexical set labels for New Zealand English
-    monophthongs,
--   `yob`: participant year of birth (our time variable),
--   `Speech_rate`: the average speech rate of the participant across the
-    recording (a control variable),
--   `Speaker`: a code indicating which speaker the token comes from
-    (sometimes useful as a random effect), and
--   `Gender`: the gender of the speaker (in this case, an `M`/`F`
-    binary).
 
 In any real research project, you will need to engage in a lot of data
 exploration here. Do you have good data coverage? Is there evidence of
