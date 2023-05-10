@@ -20,10 +20,10 @@ This tutorial is based on Wieling (2018).
 
 
 <audio controls>
-  <source src="/docs/HKE_example.wav" type="audio/wav">
+  <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/HKE_example.wav" type="audio/wav">
 </audio>
 
-https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/HKE_example.wav
+
 ---
 title: "Linguistics Methods Hub"
 license: "CC-BY-SA 4.0"
