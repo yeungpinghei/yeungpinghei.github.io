@@ -15,14 +15,17 @@ Compare the pitch production between speakers of American English and Hong Kong 
 This tutorial is based on Wieling (2018).
 
 
-<img src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/four_AME.png" width=50% height=50%>
-<img src="/docs/for_AME.png" width=50% height=50%>
+<img src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/HKE_example.png" width=50% height=50%>
+<img src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/AME_example.png" width=50% height=50%>
 
 
 <audio controls>
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/HKE_example.wav" type="audio/wav">
 </audio>
 
+<audio controls>
+  <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/AME_example.wav" type="audio/wav">
+</audio>
 
 ---
 title: "Linguistics Methods Hub"
