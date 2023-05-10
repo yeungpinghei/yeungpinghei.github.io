@@ -14,16 +14,22 @@ If you want to know more about my study, click here to read the conference paper
 Compare the pitch production between speakers of American English and Hong Kong English.
 This tutorial is based on Wieling (2018).
 
-<img src="/docs/for_HKE.png" width=50% height=50% align="right">
-<img src="/docs/four_HKE.png" width=50% height=50% align="left">
-
 
 <img src="/docs/four_AME.png" width=50% height=50%>
 <img src="/docs/for_AME.png" width=50% height=50%>
 
-::: callout-note
-I don't know what I'm doing.
-:::
+
+
+<figure>
+    <figcaption>An exmaple of HKE speaker:</figcaption>
+    <audio
+        controls
+        src="/docs/HKE_example.wav">
+            <a href="/docs/HKE_example.wav">
+                Download audio
+            </a>
+    </audio>
+</figure>
 
 ---
 title: "Linguistics Methods Hub"
