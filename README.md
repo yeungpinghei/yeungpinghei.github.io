@@ -14,6 +14,8 @@ If you want to know more about my study, click here to read the conference paper
 Compare the pitch production between speakers of American English and Hong Kong English.
 This tutorial is based on Wieling (2018).
 
+![The F0 contour of the word FOR by AE speaker](/yeungpinghei.github.io/for_AME.png)
+
 ::: callout-note
 I don't know what I'm doing.
 :::
