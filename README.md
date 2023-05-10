@@ -15,7 +15,7 @@ Compare the pitch production between speakers of American English and Hong Kong 
 This tutorial is based on Wieling (2018).
 
 
-<img src="/docs/four_AME.png" width=50% height=50%>
+<img src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/four_AME.png" width=50% height=50%>
 <img src="/docs/for_AME.png" width=50% height=50%>
 
 
