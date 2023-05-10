@@ -19,17 +19,9 @@ This tutorial is based on Wieling (2018).
 <img src="/docs/for_AME.png" width=50% height=50%>
 
 
-
-<figure>
-    <figcaption>An exmaple of HKE speaker:</figcaption>
-    <audio
-        controls
-        src="/docs/HKE_example.wav">
-            <a href="/docs/HKE_example.wav">
-                Download audio
-            </a>
-    </audio>
-</figure>
+<audio controls>
+  <source src="/docs/HK_example.wav" type="	audio/wav">
+</audio>
 
 ---
 title: "Linguistics Methods Hub"
