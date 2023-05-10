@@ -17,8 +17,11 @@ This tutorial is based on Wieling (2018).
 The F0 contour of a Hong Kong English speaker saying ***Say four again*** and ***Say for again***:
 
 <img src="docs/HKE_example.png" width=50% height=50% >
+
 ![Book logo](docs/HKE_example.png)
+
 ![Book logo](/docs/HKE_example.png)
+
 ![Book logo](https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/main/docs/AME_example.png)
 
 The F0 contour of a American English speaker saying ***Say four again*** and ***Say for again***:
