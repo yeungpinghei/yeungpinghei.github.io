@@ -14,17 +14,18 @@ If you want to know more about my study, click here to read the conference paper
 Compare the pitch production between speakers of American English and Hong Kong English.
 This tutorial is based on Wieling (2018).
 
-A speaker of Hong Kong English saying ***Say four again*** and ***Say for again***:
+The F0 contour of a Hong Kong English speaker saying ***Say four again*** and ***Say for again***:
 <img src="/docs/HKE_example.png" width=50% height=50%>
 
-A speaker of American English saying ***Say four again*** and ***Say for again***:
+The F0 contour of a American English speaker saying ***Say four again*** and ***Say for again***:
 <img src="/docs/AME_example.png" width=50% height=50%>
 
-
+A speaker of Hong Kong English saying ***Say four again*** and ***Say for again***:
 <audio controls>
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/HKE_example.wav" type="audio/wav">
 </audio>
 
+A speaker of American English saying ***Say four again*** and ***Say for again***:
 <audio controls>
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/AME_example.wav" type="audio/wav">
 </audio>
