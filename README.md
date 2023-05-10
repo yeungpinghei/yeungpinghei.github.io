@@ -18,7 +18,7 @@ The F0 contour of a Hong Kong English speaker saying ***Say four again*** and **
 <img src="docs/HKE_example.png" width=50% height=50% >
 
 The F0 contour of a American English speaker saying ***Say four again*** and ***Say for again***:
-<img src="docs/AME_example.png" width=50% height=50%>
+<img src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/main/docs/AME_example.png" width=50% height=50%>
 
 A speaker of Hong Kong English saying ***Say four again*** and ***Say for again***:
 <audio controls>
