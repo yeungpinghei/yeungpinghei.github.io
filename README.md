@@ -35,20 +35,6 @@ A speaker of American English saying ***Say four again*** and ***Say for again**
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/AME_example.wav" type="audio/wav">
 </audio>
 
----
-title: "Linguistics Methods Hub"
-license: "CC-BY-SA 4.0"
-date: 2022-10-5
-citation: 
-  editor:
-    - name:
-        given: Josef 
-        family: Fruehwald
-    - name:
-        given: Matt Hunt 
-        family: Gardner
----
-
 ## A brief introduction of the data
 In this dataset each row is an F0 measurement, with columns:
 
