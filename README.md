@@ -6,7 +6,12 @@ Georgetown University
 May 11, 2023</p>
 
 ## What is GAMM?
-Generalized Additive Mixed Models (GAMMs) are an extension of Generalized Linear Mixed Models (GLMMs) that allow for more flexible modeling of nonlinear relationships between the response variable and the predictor variables.
+Generalized Additive Mixed Models <a href="https://www.taylorfrancis.com/books/mono/10.1201/9781315370279/generalized-additive-models-simon-wood">(GAMMs; Wood 2017)</a> are an extension of Generalized Linear Mixed Models (GLMMs) that allow for more flexible modeling of nonlinear relationships between the response variable and the predictor variables.
+
+It is a very useful tatistical tool to analyze dynamic data in sociophonetics.
+Plenty of recent studies have made use of GAMM to analyze vowel formants, pitch, articulatory measurements, etc.
+In this tutorial, I will show you a step-by-step guide on how GAMM works using my data on Hong Kong English as an example.
+
 GAMMs use smooth functions, such as splines or smoothing splines, to model the nonlinear relationships.
 The "additive" component of GAMMs refers to the fact that each smooth function is added to a linear predictor that includes the other predictor variables.
 This means that the smooth functions are independent of each other and do not interact with each other.
@@ -28,15 +33,15 @@ Thus, the use of smooth functions in GAMMs allows for more flexible modeling of 
 In recent years, there has been increasing interest in using GAMM in sociophonetic research, e.g. vowel merger, lexical, etc.
 
 
+ Check out tutorial for more sophisticated discussions on the mechanisms of GAMM
 
 
 
-This tutorial is based on Wieling (2018).
+
 In this tutorial, you will learn the basics of generalized additive mixed modelling (GAMM).
+This tutorial is inspired by Wieling <a href="https://doi.org/10.1016/j.wocn.2018.03.002">(2018)</a> and modifications have been made to suit my own data.
 
-It is a very useful tatistical tool to analyze dynamic data in sociophonetics.
-Plenty of recent studies have made use of GAMM to analyze vowel formants, pitch, articulatory measurements, etc.
-In this tutorial, I will show you a step-by-step guide on how GAMM works using my data on Hong Kong English as an example.
+
 
 ## Our sample data: tones in Hong Kong English
 In this study, I want to find out if Hong Kong English is a tone language.
