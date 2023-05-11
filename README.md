@@ -107,7 +107,7 @@ In in csv file, each row represents an F0 measurement, with columns:
 -  `cat`: the syntactic category of the target word, content word (content) or function word (function)
 - `adjacent`: the onset and coda consonants of the target word
 
-Before applying any statistical models, we may first visualize the original data to check how they looks like.
+Before applying any statistical models, we may first visualize the original data to check how they look like.
 
 ```r
 # Normalized F0 trajectory of each token by individual speakers
@@ -141,7 +141,7 @@ However, this graph does not the consider the effect of other factors on pitch p
 Thus, the effect of syntactic category on F0 may be overestimated.
 
 ## Step 1: The most basic linear model
-In this step, we construct a very basic linear regression model using the `bam()` function with the normalized F0 `semitone.norm` as the dependent variable and the syntactic category `cat` as the independent variable. We will start from here and expand our model bit by bit.
+In this step, we construct a very basic linear regression model using the `bam()` function with the normalized F0 `semitone.norm` as the dependent variable and the syntactic category `cat` as the independent variable. The argument `data` refers to the data frame containing the model response variable and covariates required by the formula, which is named as `data`. The argument `method` refers to the estimation method we use for thesmoothing parameter. Here we may use the default method which is `"fREML"`. We will start from here and expand our model bit by bit.
 ```r
 m1 <- bam(semitone.norm ~ cat, data=data, method="fREML")
 summary(m1)
