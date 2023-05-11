@@ -6,42 +6,18 @@ Georgetown University
 May 11, 2023</p>
 
 ## What is GAMM?
-Generalized Additive Mixed Models <a href="https://www.taylorfrancis.com/books/mono/10.1201/9781315370279/generalized-additive-models-simon-wood">(GAMMs; Wood 2017)</a> are an extension of Generalized Linear Mixed Models (GLMMs) that allow for more flexible modeling of nonlinear relationships between the response variable and the predictor variables.
+Generalized Additive Mixed Models <a href="https://www.taylorfrancis.com/books/mono/10.1201/9781315370279/generalized-additive-models-simon-wood">(GAMMs; Wood 2017)</a> are an extension of Generalized Linear Mixed Models that allow for more flexible modeling of non－linear relationships between the depdendent and independent variables.
+A relatively new approach, GAMMs have received increased attention in recent sociophonetic studies that involve the analysis of vowel formants (Kirkham et al., 2019; Stanley et al., 2021) and articulatory measurements (Carignan et al., 2020).
+GAMMs are comparable to linear mixed effect modeling, but they differ in how they model the relationships between depdendent and independent variables.
+In linear mixed effect modeling, the relationships between the variables are typically modeled using linear functions.
+In GAMMs on the other hand, the relationships between the variables are modeled using smooth functions, such as splines or smoothing splines.
+These smooth functions can capture more complex and nonlinear relationships between the variables, which allows for the modeling of non-linear differences like vowel formant trajectories.
+Therefore, GAMMs have a major advantage in modeling dynamic acoustic and articulatory data like vowel formant trajectories and F0 contours which are nonlinear in nature.
 
-It is a very useful tatistical tool to analyze dynamic data in sociophonetics.
-Plenty of recent studies have made use of GAMM to analyze vowel formants, pitch, articulatory measurements, etc.
-In this tutorial, I will show you a step-by-step guide on how GAMM works using my data on Hong Kong English as an example.
-
-GAMMs use smooth functions, such as splines or smoothing splines, to model the nonlinear relationships.
-The "additive" component of GAMMs refers to the fact that each smooth function is added to a linear predictor that includes the other predictor variables.
-This means that the smooth functions are independent of each other and do not interact with each other.
-The "mixed" component of GAMMs refers to the fact that they allow for random effects, which account for correlation between observations that arise from grouping variables, such as 'participant' or 'word' in sociophonetic studies.
-Random effects can also be added to the smooth functions, allowing for additional flexibility in the model.
-GAMMs are useful when the relationship between the response variable and the predictor variables is complex and nonlinear.
-
-GAMMs (Generalized Additive Mixed Models) and linear mixed-effects models (LMMs) are both types of mixed-effects models, but they differ in how they model the relationships between the predictor variables and the response variable.
-In a LMM, the relationships between the predictor variables and the response variable are typically modeled using linear functions.
-The linear functions can include fixed effects and random effects, which account for the correlation between observations that arise from grouping variables.
-
-
-On the other hand, in a GAMM, the relationships between the predictor variables and the response variable are modeled using smooth functions, such as splines or smoothing splines.
-Therefore, GAMMs have a major advantage in modelling dynamic acoustic and articulatory data like vowel formant trajectories and F0 contours.
-Unlike linear mixed-effect models, we can incorporate 
-The smooth functions can capture more complex and nonlinear relationships between the predictor variables and the response variable.
-Thus, the use of smooth functions in GAMMs allows for more flexible modeling of the relationships between the predictor variables and the response variable.
-
-In recent years, there has been increasing interest in using GAMM in sociophonetic research, e.g. vowel merger, lexical, etc.
-
-
- Check out tutorial for more sophisticated discussions on the mechanisms of GAMM
-
-
-
-
-In this tutorial, you will learn the basics of generalized additive mixed modelling (GAMM).
+In this tutorial, you will learn the basics of generalized additive mixed modelling (GAMM) using my data on Hong Kong English as an example.
 This tutorial is inspired by Wieling <a href="https://doi.org/10.1016/j.wocn.2018.03.002">(2018)</a> and modifications have been made to suit my own data.
 
-
+Check out the tutorial by Winter & Wieling (2016), Sóskuthy (2017, 2021), Wieling (2018) for more sophisticated discussions on the mechanisms of GAMM
 
 ## Our sample data: tones in Hong Kong English
 In this study, I want to find out if Hong Kong English is a tone language.
@@ -412,7 +388,7 @@ m.full <- bam(semitone.norm ~ cat.variety +
               data = data
 summary(m.full)
 ```
-<img src="/docs/m9_summary.png" alt="m9_summary" width="50%">
+<img src="/docs/m9_summary.png" alt="m9_summary" width="60%">
 
 ## Step 10: Visualize the output of the final GAMM
 ```r
