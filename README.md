@@ -1,6 +1,8 @@
 # An introduction to Generalised Additive Mixed Models (GAMMs)
 <p style="font-size: 24px;">Author: Ping Hei Yung
+  <br>
 Georgetown University
+  <br>
 May 11, 2023</p>
 
 ## What is GAMM?
