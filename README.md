@@ -12,7 +12,7 @@ It is a very useful tatistical tool to analyze dynamic data in sociophonetics.
 Plenty of recent studies have made use of GAMM to analyze vowel formants, pitch, articulatory measurements, etc.
 In this tutorial, I will show you a step-by-step guide on how GAMM works using my data on Hong Kong English as an example.
 
-## Our sample data
+## Our sample data: tones in Hong Kong English
 In this study, I want to find out if Hong Kong English is a tone language.
 According to recent studies on Hong Kong English like Wee (2016) and Gussenhoven (2014), monosyllabic content words may have a **high** tone while monosyllabic function words may have a **low** tone.
 I want to know if that is really the case, so I asked speakers of Hong Kong English and American English to read those words, and I extracted the F0 contours they produced on Praat.
