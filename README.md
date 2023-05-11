@@ -24,8 +24,8 @@ Listen to it:
 <audio controls>
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/HKE_example.wav" type="audio/wav">
 </audio>
-
-
+<br>
+<br>
 
 On the other hand, speakers of American English like the one in **Figure 2** seem to produce both the ceontent words and the function words with the same pitch.
 You may compare the two figures and see how they differ.
@@ -36,8 +36,8 @@ Listen to it:
 <audio controls>
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/AME_example.wav" type="audio/wav">
 </audio>
-
-
+<br>
+<br>
 
 However, just by looking at the raw F0 contour alone is not enough to answer my research question.
 How do I know if the difference is statistically significant?
