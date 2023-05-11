@@ -14,7 +14,7 @@ In this tutorial, I will show you a step-by-step guide on how GAMM works using m
 
 ## Our sample data: tones in Hong Kong English
 In this study, I want to find out if Hong Kong English is a tone language.
-According to recent studies on Hong Kong English like Wee (2016) and Gussenhoven (2014), monosyllabic content words may have a **high** tone while monosyllabic function words may have a **low** tone.
+According to recent studies on Hong Kong English like Wee <a href="https://muse.jhu.edu/article/621181"> (2016) </a> and Gussenhoven (2014), monosyllabic content words may have a **high** tone while monosyllabic function words may have a **low** tone.
 I want to know if that is really the case, so I asked speakers of Hong Kong English and American English to read those words, and I extracted the F0 contours they produced on Praat.
 As you can see in **Figure 1**, speakers of Hong Kong English like the one here tend to produce content words like "four" with a higher pitch than function words like "for".
 
