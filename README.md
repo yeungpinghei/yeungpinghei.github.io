@@ -155,7 +155,8 @@ summary(m1)
 
 To obtain a summary of the model, we can use the `summary()` function.
 - The top line of the model summary: the family of model used (Gaussian model), the link function (identity) and the model formula.
-The next block shows the parametric coefficients:
+
+Parametric coefficients:
 - The intercept is the value of the dependent variable when all numerical predictors are equal to 0 and nominal variables are at their reference level.
 Since the reference level for the nominal variable `cat` is 'content', the average normalized F0 of content words is about 0.23.
 - The line associated with catfunction (function word, the non-reference level) indicates that the normalized F0 of function words is about 0.48 lower than that of content words, and this difference is significant with a very small p-value (p<2e-16).
