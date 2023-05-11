@@ -16,7 +16,7 @@ I want to know if that is really the case, so I asked speakers of Hong Kong Engl
 As you can see in **Figure 1**, speakers of Hong Kong English tend to produce content words like *four* with a higher pitch than function words like *for*.
 
 **Figure 1**. The F0 contour of a Hong Kong English speaker saying ***Say four again*** and ***Say for again***:
-![Book logo](/docs/HKE_example.png)
+![HKE example](/docs/HKE_example.png)
 Listen to it:
 <audio controls>
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/HKE_example.wav" type="audio/wav">
@@ -26,7 +26,7 @@ On the other hand, speakers of American English like the one in **Figure 2** see
 You may compare the two figures and see how they differ.
 
 **Figure 2**: The F0 contour of a American English speaker saying ***Say four again*** and ***Say for again***:
-![Book logo](/docs/AME_example.png)
+![AE example](/docs/AME_example.png)
 Listen to it:
 <audio controls>
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/AME_example.wav" type="audio/wav">
@@ -45,38 +45,62 @@ My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it s
 ## A brief introduction of the data
 First, download the R script and the csv file from the Github repository.
 
+Load the packages we need for the R script
+```r
+# Load the packages
+library(tidyverse)
+library(mgcv)
+library(itsadug)
+library(tidymv)
+```
+Import the csv file and define the data type of each column
+
+```r
+data <- data %>%
+  mutate_at(c("speaker", "variety", "gender", "word", "token", "cat","adjacent"), as.factor) %>%
+  mutate_at(c("age", "duration", "repetition", "point", "F0", "semitone.norm"), as.numeric)
+summary(data)
+```
 
 In in csv file, each row represents an F0 measurement, with columns:
 
-- `speaker`:  a unique code for each individual speaker
-- `variety`: the English variety spoken by the participant (American English or Hong Kong English)
-- `age`: the age of individual speakers
-- `gender`: the gender of individual speakers
+- `speaker`:  a unique code for each speaker
+- `variety`: the English variety spoken by the participant, American English (AE) or Hong Kong English (HKE)
+- `age`: age of the speaker
+- `gender`: gender of the speaker
 - `word`: the word from which the measurement was taken
 - `duration`: duration (in seconds) of the target word
 - `repetition`: each target word was repeated three times (1-3)
 - `point`: 9 equidistant F0 measurements were made at the 10%-90% intervals of the target words (1-9)
 - `F0`: the raw F0 measurements from Praat
-- `semitone`: pitch converted from F0 to semitone
 - `token`: the three columns `speaker`, `word`, and `repetition` combined into one
 - `semitone.norm`: the F0 measurements converted to semitones and z-score normalized by speaker
--  `cat`: the syntactic category of the target word (content word or function word)
+-  `cat`: the syntactic category of the target word, content word (content) or function word (function)
 - `adjacent`: the onset and coda consonants of the target word
 
 First, we visualize the original data to check how it looks like before applying any statistical models.
 
 ```r
-for_graph %>%
-  ggplot(aes(x = point*10, y = mean_st, group = cat, color = cat)) +
+# Normalized F0 trajectory of each token by individual speakers
+data %>%
+  ggplot(aes(x = point, y = semitone.norm, color = cat, group = token)) + 
   geom_line() +
-  facet_wrap(~variety) +
-  geom_errorbar(aes(ymin=mean_st-sd_st, ymax=mean_st+sd_st), width=2) +
-  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) + 
-  scale_y_continuous(name = "Mean F0 (semitone)") +
-  scale_color_discrete(name = "Syntactic category", breaks = c("content","function"), labels = c("Content word","Function word")) +
-  scale_fill_discrete(name = "Syntactic category", breaks = c("content","function"), labels = c("Content word","Function word")) +
-  theme_minimal(base_size = 18)
+  facet_wrap(~speaker)
 ```
+![AE example](/docs/line_all.png)
+Here we have the normalized F0 contours of each speaker, but there's not much we can get from the graph since individual lines are messy.
+What about making a `geom_smooth` plot to see how speakers of Hong Kong English and American English do?
+
+```r
+# Normalized F0 trajectory by syntactic category and English variety
+data %>%
+  group_by(speaker,cat,point,variety) %>%
+  summarise(mean = mean(semitone.norm)) %>%
+  ggplot(aes(x = point, y = mean, group = cat, color = cat)) +
+  geom_smooth(method="loess") +
+  facet_wrap(~variety)
+```
+
 
 ## Step 1: The most basic linear model
 
