@@ -88,8 +88,9 @@ data %>%
   facet_wrap(~speaker)
 ```
 ![AE example](/docs/line_all.png)
+<img src="/docs/line_all.png" alt="Many lines" width="750" height="700">
 Here we have the normalized F0 contours of each speaker, but there's not much we can get from the graph since individual lines are messy.
-What about making a `geom_smooth` plot to see how speakers of Hong Kong English and American English do?
+Let's make a `geom_smooth` plot to see what speakers of Hong Kong English and American English did in general.
 
 ```r
 # Normalized F0 trajectory by syntactic category and English variety
