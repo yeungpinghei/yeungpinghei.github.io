@@ -92,7 +92,6 @@ data <- data %>%
 summary(data)
 ```
 
-<p style="font-size: 12px;">
 | word | adjacent | speaker | variety | age | gender | duration | repetition | point | F0 | token | semitone.norm | cat |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | an | null.son | AME_007 | AE | 19 | F | 0.429388633 | 3 | 8 | 200.8319991 | AE_007-an-3 | 0.634121036 | function |
@@ -105,7 +104,7 @@ summary(data)
 | an | null.son | HKE_010 | HKE | 38 | F | 0.247996446 | 1 | 9 | 140.0242878 | HKE_010-an-1 | -1.458272919 | function |
 | an | null.son | AME_033 | AE | 18 | M | 0.207696414 | 2 | 2 | 93.90499073 | AE_033-an-2 | -1.735087432 | function |
 | an | null.son | HKE_038 | HKE | 35 | F | 0.22003899 | 2 | 5 | 180.9764375 | HKE_038-an-2 | -0.992133573 | function |
-</p>
+
 
 In in csv file, each row represents an F0 measurement, with columns:
 
