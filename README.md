@@ -10,30 +10,40 @@ In this tutorial, you will learn the basics of generalized additive mixed modell
 
 It is a very useful tatistical tool to analyze dynamic data in sociophonetics.
 Plenty of recent studies have made use of GAMM to analyze vowel formants, pitch, articulatory measurements, etc.
+In this tutorial, I will show you a step-by-step guide on how GAMM works using my data on Hong Kong English as an example.
 
 ## Our sample data
-In this tutorial, I will show you a step-by-step guide on how GAMM works using my data on Hong Kong English as an example.
-I will present my findings at ICPhS 2023.
-If you want to know more about my study, click here to read the conference paper.
-(Yeung, 2023)
-Compare the pitch production between speakers of American English and Hong Kong English.
+In this study, I want to find out if Hong Kong English is a tone language.
+According to recent studies on Hong Kong English like Wee (2016) and Gussenhoven (2014), monosyllabic content words may have a **high** tone while monosyllabic function words may have a **low** tone.
+I want to know if that is really the case, so I asked speakers of Hong Kong English and American English to read those words, and I extracted the F0 contours they produced on Praat.
+As you can see in **Figure 1**, speakers of Hong Kong English like the one here tend to produce content words like "four" with a higher pitch than function words like "for".
 
-
-The F0 contour of a Hong Kong English speaker saying ***Say four again*** and ***Say for again***:
+Figure 1. The F0 contour of a Hong Kong English speaker saying ***Say four again*** and ***Say for again***:
 ![Book logo](/docs/HKE_example.png)
-
-The F0 contour of a American English speaker saying ***Say four again*** and ***Say for again***:
-![Book logo](/docs/AME_example.png)
-
-A speaker of Hong Kong English saying ***Say four again*** and ***Say for again***:
+Listen to it:
 <audio controls>
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/HKE_example.wav" type="audio/wav">
 </audio>
 
-A speaker of American English saying ***Say four again*** and ***Say for again***:
+On the other hand, speakers of American English like the one in **Figure 2** seem to produce both the ceontent words and the function words with the same pitch.
+You may compare the two figures and see how they differ.
+
+Figure 2: The F0 contour of a American English speaker saying ***Say four again*** and ***Say for again***:
+![Book logo](/docs/AME_example.png)
+Listen to it:
 <audio controls>
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/AME_example.wav" type="audio/wav">
 </audio>
+
+However, just by looking at the raw F0 contour alone is not enough to answer my research question.
+How do I know if the difference is statistically significant?
+
+
+If you want to know more about my study, click here to read the conference paper. I will present my findings at ICPhS 2023.
+
+
+
+
 
 ## A brief introduction of the data
 In this dataset each row is an F0 measurement, with columns:
@@ -52,6 +62,8 @@ In this dataset each row is an F0 measurement, with columns:
 - `semitone.norm`: the F0 measurements converted to semitones and z-score normalized by speaker
 -  `cat`: the syntactic category of the target word (content word or function word)
 - `adjacent`: the onset and coda consonants of the target word
+
+
 
 ## h2 Heading
 ### h3 Heading
