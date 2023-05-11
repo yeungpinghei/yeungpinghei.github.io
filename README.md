@@ -14,26 +14,29 @@ In this tutorial, I will show you a step-by-step guide on how GAMM works using m
 
 ## Our sample data: tones in Hong Kong English
 In this study, I want to find out if Hong Kong English is a tone language.
-According to recent studies on Hong Kong English like Wee <a href="https://muse.jhu.edu/article/621181"> (2016) </a> and Gussenhoven (2014), monosyllabic content words may have a **high** tone while monosyllabic function words may have a **low** tone.
+According to recent studies on Hong Kong English like Wee <a href="https://muse.jhu.edu/article/621181"> (2016) </a> and Gussenhoven <a href="https://doi.org/10.1093/oxfordhb/9780199777716.013.29"> (2014) </a>, monosyllabic content words may have a **high** tone while monosyllabic function words may have a **low** tone.
+
 I want to know if that is really the case, so I asked speakers of Hong Kong English and American English to read those words, and I extracted the F0 contours they produced on Praat.
 As you can see in **Figure 1**, speakers of Hong Kong English like the one here tend to produce content words like "four" with a higher pitch than function words like "for".
 
-Figure 1. The F0 contour of a Hong Kong English speaker saying ***Say four again*** and ***Say for again***:
+**Figure 1**. The F0 contour of a Hong Kong English speaker saying ***Say four again*** and ***Say for again***:
 ![Book logo](/docs/HKE_example.png)
 Listen to it:
 <audio controls>
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/HKE_example.wav" type="audio/wav">
 </audio>
 
+
 On the other hand, speakers of American English like the one in **Figure 2** seem to produce both the ceontent words and the function words with the same pitch.
 You may compare the two figures and see how they differ.
 
-Figure 2: The F0 contour of a American English speaker saying ***Say four again*** and ***Say for again***:
+**Figure 2**: The F0 contour of a American English speaker saying ***Say four again*** and ***Say for again***:
 ![Book logo](/docs/AME_example.png)
 Listen to it:
 <audio controls>
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/AME_example.wav" type="audio/wav">
 </audio>
+
 
 However, just by looking at the raw F0 contour alone is not enough to answer my research question.
 How do I know if the difference is statistically significant?
