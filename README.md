@@ -89,8 +89,7 @@ data %>%
   facet_wrap(~speaker)
 ```
 
-<img src="/docs/line_all.png" alt="Many lines" width="750" height="700">
-<img src="/docs/line_all.png" alt="Many lines" width="50%">
+<img src="/docs/line_all.png" alt="Many lines" width="80%">
 
 Here we have the normalized F0 contours of each speaker, but there's not much we can get from the graph since individual lines are messy.
 
@@ -120,6 +119,7 @@ summary(m1)
 ```
 
 ![m1_summary](/docs/m1_summary.png)
+<img src="/docs/m1_summary.png" alt="m1_summary" width="70%">
 
 ## Step 2: Include a smooth for change in F0 over time
 ```r
@@ -127,6 +127,7 @@ m2 <- bam(semitone.norm ~ cat + s(point, by=cat,bs="tp", k=9), data=data)
 summary(m2)
 ```
 ![m2_summary](/docs/m2_summary.png)
+<img src="/docs/m2_summary.png" alt="m2_summary" width="70%">
 
 **Question**: How do we interpret the results?
 `Ref.df`: the reference number of degrees of freedom used for hypothesis testing
