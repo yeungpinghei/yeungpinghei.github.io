@@ -90,6 +90,7 @@ data %>%
 ```
 
 <img src="/docs/line_all.png" alt="Many lines" width="750" height="700">
+<img src="/docs/line_all.png" alt="Many lines" width="50%">
 
 Here we have the normalized F0 contours of each speaker, but there's not much we can get from the graph since individual lines are messy.
 
@@ -105,7 +106,6 @@ data %>%
   facet_wrap(~variety)
 ```
 <img src="/docs/smooth_variety.png" alt="geom_smooth">
-<img src="/docs/smooth_variety.png" alt="geom_smooth" width="50%">
 
 We can observe that speakers of Hong Kong English and American English produced the content words and function words with differnt pitch contours.
 As indicated by the 95% confidence interval (the shaded area), there is a complete overlap of pitch contour for American English speakers.
