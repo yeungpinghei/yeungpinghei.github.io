@@ -118,7 +118,7 @@ m1 <- bam(semitone.norm ~ cat, data=data, method="fREML")
 summary(m1)
 ```
 
-<img src="/docs/m1_summary.png" alt="m1_summary" width="60%">
+<img src="/docs/m1_summary.png" alt="m1_summary" width="50%">
 
 ## Step 2: Include a smooth for change in F0 over time
 ```r
@@ -126,7 +126,7 @@ m2 <- bam(semitone.norm ~ cat + s(point, by=cat,bs="tp", k=9), data=data)
 summary(m2)
 ```
 
-<img src="/docs/m2_summary.png" alt="m2_summary" width="60%">
+<img src="/docs/m2_summary.png" alt="m2_summary" width="50%">
 
 **Question**: How do we interpret the results?
 `Ref.df`: the reference number of degrees of freedom used for hypothesis testing
