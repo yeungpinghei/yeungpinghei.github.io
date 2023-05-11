@@ -11,7 +11,7 @@ A relatively new approach, GAMMs have received increased attention in recent soc
 GAMMs are comparable to linear mixed effect modeling, but they differ in how they model the relationships between depdendent and independent variables.
 In linear mixed effect modeling, the relationships between the variables are typically modeled using linear functions.
 In GAMMs on the other hand, the relationships between the variables are modeled using smooth functions, such as splines or smoothing splines.
-These smooth functions can capture more complex and nonlinear relationships between the variables, which allows for the modeling of non-linear differences like vowel formant trajectories.
+These smooth functions can capture more complex and nonlinear relationships between the variables, which allows for the modeling of nonlinear differences like vowel formant trajectories.
 Therefore, GAMMs have a major advantage in modeling dynamic acoustic and articulatory data like vowel formant trajectories and F0 contours which are nonlinear in nature.
 
 In this tutorial, you will learn the basics of generalized additive mixed modelling (GAMM) using my data on Hong Kong English as an example.
