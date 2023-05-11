@@ -37,19 +37,10 @@ Listen to it:
 <br>
 However, just by looking at the raw F0 contour alone is not enough to answer my research question.
 How do I know if the difference is statistically significant?
-This is why we need GAMM.
 In the next section, I will provide a step-by-step guide on how I used GAMM to analyze me data.
 
->I will present my findings at ICPhS 2023 this August, so please come if you want to know more about my study!
->My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it should be available soon on the conference wrbsite.
-<div class="extended-markdown tip border rounded-1 mb-4 p-3 color-border-accent-emphasis color-bg-accent f5">
-  <p>
-    I will present my findings at ICPhS 2023 this August, so please come if you want to know more about my   study!
-    My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it should be available soon on the conference wrbsite.
-  </p>
-</div>
-  
-            
+I will present my findings at ICPhS 2023 this August, so please come if you want to know more about my study!
+My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it should be available soon on the conference website.
 
 ## A brief introduction of the data
 In this dataset each row is an F0 measurement, with columns:
