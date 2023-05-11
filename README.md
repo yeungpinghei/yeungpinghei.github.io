@@ -442,3 +442,23 @@ diff %>%
 ```
 
 <img src="/docs/gamm_diff.png" alt="gamm_diff">
+
+## References
+Carignan, C., Hoole, P., Kunay, E., Pouplier, M., Joseph, A., Voit, D., Frahm, J., & Harrington, J. (2020). Analyzing speech in both time and space: Generalized additive mixed models can uncover systematic patterns of variation in vocal tract shape in real-time MRI. Laboratory Phonology: Journal of the Association for Laboratory Phonology, 11(1), Article 1. https://doi.org/10.5334/labphon.214
+
+Gussenhoven, C. (2014). On the intonation of tonal varieties of English. In M. Filppula, J. Klemola, & D. Sharma (Eds.), The Oxford Handbook of World Englishes. Oxford University Press.
+
+Kirkham, S., Nance, C., Littlewood, B., Lightfoot, K., & Groarke, E. (2019). Dialect variation in formant dynamics: The acoustics of lateral and vowel sequences in Manchester and Liverpool English. The Journal of the Acoustical Society of America, 145(2), 784–794. https://doi.org/10.1121/1.5089886
+
+Sóskuthy, M. (2017). Generalised additive mixed models for dynamic analysis in linguistics: A practical introduction (arXiv:1703.05339). arXiv. https://doi.org/10.48550/arXiv.1703.05339
+
+Sóskuthy, M. (2021). Evaluating generalised additive mixed modelling strategies for dynamic speech analysis. Journal of Phonetics, 84, 101017. https://doi.org/10.1016/j.wocn.2020.101017
+
+Stanley, J. A., Renwick, M. E. L., Kuiper, K. I., & Olsen, R. M. (2021). Back Vowel Dynamics and Distinctions in Southern American English. Journal of English Linguistics, 49(4), 389–418. https://doi.org/10.1177/00754242211043163
+
+Wee, L.-H. (2016). Tone assignment in Hong Kong English. Language, 92, e67–e87. https://doi.org/10.1353/lan.2016.0039
+Wieling, M. (2018). Analyzing dynamic phonetic data using generalized additive mixed modeling: A tutorial focusing on articulatory differences between L1 and L2 speakers of English. Journal of Phonetics, 70, 86–116. https://doi.org/10.1016/j.wocn.2018.03.002
+
+Winter, B., & Wieling, M. (2016). How to analyze linguistic change using mixed models, Growth Curve Analysis and Generalized Additive Modeling. Journal of Language Evolution, 1(1), 7–18. https://doi.org/10.1093/jole/lzv003
+
+Wood, S. N. (2017). Generalized Additive Models: An Introduction with R, Second Edition (2nd ed.). Chapman and Hall/CRC. https://doi.org/10.1201/9781315370279
