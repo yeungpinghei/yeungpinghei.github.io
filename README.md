@@ -118,23 +118,40 @@ m1 <- bam(semitone.norm ~ cat, data=data, method="fREML")
 summary(m1)
 ```
 
-<p>Family: gaussian <br>
-Link function: identity</p>
-
-<p>Formula:<br>
-semitone.norm ~ cat</p>
-
-<p>Parametric coefficients:<br>
- Estimate Std. Error t value Pr(>|t|) <br>
-(Intercept) 0.227742 0.007747 29.40 <2e-16 ***<br>
-catfunction -0.478826 0.011004 -43.51 <2e-16 ***<br>
----</p>
-
-<p>
-R-sq.(adj) = 0.0581 Deviance explained = 5.81%<br>
--REML = 42441 Scale est. = 0.92928 n = 30699</p>
+![m1_summary](/docs/m1_summary.png)
 
 ## Step 2: Include a smooth for change in F0 over time
+```r
+m2 <- bam(semitone.norm ~ cat + s(point, by=cat,bs="tp", k=9), data=data)
+summary(m2)
+```
+![m2_summary](/docs/m2_summary.png)
+
+**Question**: How do we interpret the results?
+`Ref.df`: the reference number of degrees of freedom used for hypothesis testing
+`edf`: the number of effective degrees of freedom, the amount of non-linearity of the smooth. Greater value indicates more complex pattern.
+`R-sq`: the amount of variance explained by the regression
+`Deviance explained`:a generalization of R-sq, basically the same as R-sq
+`fREML`: no meaning by itself, used for comparing models
+`Scale est.`: the variance of the residuals
+`n`: the number of data points
+
+```r
+## Check the model
+gam.check(m2)
+```
+
+Low p-value (k-index<1) may indicate that k is too low, especially if edf is close to k'.
+
+We may visualize the results of GAMM using `plot_smooth()` and 'plot_diff()`
+
+```r
+plot_smooth(m2, view="point", plot_all= "cat", rug=FALSE)
+plot_diff(m2, view="point", comp=list(cat=c("content","function")))
+```
+![plot_smooth](/docs/plot_smooth_m2.png)
+![plot_diff](/docs/plot_diff_m2.png)
+
 
 ## Step 3: Include random intercepts for speakers and words
 **Question**: What is the difference between random intercepts and random slopes?
