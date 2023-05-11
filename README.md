@@ -1,9 +1,9 @@
 # An introduction to Generalised Additive Mixed Models (GAMMs)
 <p style="font-size: 24px;">Author: Ping Hei Yeung
   <br>
-Georgetown University
+Affiliation: Georgetown University
   <br>
-May 11, 2023</p>
+Published: May 11, 2023</p>
 
 ## What is GAMM?
 Generalized Additive Mixed Models (<a href="https://www.taylorfrancis.com/books/mono/10.1201/9781315370279/generalized-additive-models-simon-wood">GAMMs; Wood 2017</a>) are an extension of Generalized Linear Mixed Models that allow for more flexible modeling of nonlinear relationships between the depdendent and independent variables.
@@ -121,7 +121,7 @@ data %>%
 
 Here we have the normalized F0 contours of each speaker, but it's hard for us to pick up any patterns from the graph since the individual lines are messy.
 
-Let's make a `geom_smooth` plot to see what speakers of Hong Kong English and American English did in general.
+Let's make a `geom_smooth()` plot to see what speakers of Hong Kong English and American English did in general.
 
 ```r
 # Normalized F0 trajectory by syntactic category and English variety
@@ -141,14 +141,38 @@ However, this graph does not the consider the effect of other factors on pitch p
 Thus, the effect of syntactic category on F0 may be overestimated.
 
 ## Step 1: The most basic linear model
-In this step, we construct a very basic linear regression model using the `bam()` function with the normalized F0 `semitone.norm` as the dependent variable and the syntactic category `cat` as the independent variable. The argument `data` refers to the data frame containing the model response variable and covariates required by the formula, which is named as **data**. The argument `method` refers to the estimation method we use for thesmoothing parameter. Here we may use the default method which is `"fREML"`. We will start from here and expand our model bit by bit.
+In this step, we construct a very basic linear regression model using the `bam()` function with the normalized F0 `semitone.norm` as the dependent variable and the syntactic category `cat` as the independent variable.
+Essentially, the model estimates the average difference in normalized F0 between function words and content words.
+The argument `data` refers to the data frame containing the dependent and independent variables, which is named as **data** in our case.
+The argument `method` specifies the estimation method we use for the smoothing parameter. Here we may use the default method `"fREML"`, fast restricted maximum likelihood estimation.
+We will start from here and expand our model bit by bit.
 ```r
 m1 <- bam(semitone.norm ~ cat, data=data, method="fREML")
 summary(m1)
 ```
 
 <img src="/docs/m1_summary.png" alt="m1_summary" width="50%">
-The model summary shows that
+
+To obtain a summary of the model, we can use the `summary()` function.
+To top line of the model summary shows the family of model used (Gaussian model), the link function (identity) and the model formula.
+The next block shows the parametric coefficients.
+The intercept is the value of the dependent variable when all numerical predictors are equal to 0 and nominal variables are at their reference level.
+Since the reference level for the nominal variable `cat` is 'content', the average normalized F0 of content words is about 0.23.
+The line associated with catfunction (function word, the non-reference level) indicates that the normalized F0 of function words is about 0.48 lower than that of content words, and this difference is significant with a very small p-value (p<2e-16).
+
+The final two lines of the summary show the goodness-of-fit statistics.
+- **R-sq.(adj)** represents the amount of variance explained by the regression.
+
+- **Deviance explained** is a generalization of R-sq.
+
+- **REML** (restricted maximum likelihood) by itself is not informative.
+Its value is only meaningful when two models are compared which are fit to the same data, but only differ in their random effects.
+A lower value means that the model is a better fit to the data.
+For models with non-linear patterns, the REML label is replaced by fREML.
+
+- **Scale est.** represents the variance of the residuals.
+
+- **n** is the number of data points in the model.
 
 ## Step 2: Include a smooth for change in F0 over time
 ```r
