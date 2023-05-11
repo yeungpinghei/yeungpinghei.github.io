@@ -143,7 +143,7 @@ gam.check(m2)
 
 Low p-value (k-index<1) may indicate that k is too low, especially if edf is close to k'.
 
-We may visualize the results of GAMM using `plot_smooth()` and 'plot_diff()`
+We may visualize the results of GAMM using `plot_smooth()` and `plot_diff()`
 
 ```r
 plot_smooth(m2, view="point", plot_all= "cat", rug=FALSE)
