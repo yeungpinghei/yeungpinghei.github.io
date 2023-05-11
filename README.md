@@ -164,16 +164,12 @@ The final two lines of the summary show the goodness-of-fit statistics.
 - **R-sq.(adj)** represents the amount of variance explained by the regression.
 
 - **Deviance explained** is a generalization of R-sq.
-
 - **REML** (restricted maximum likelihood) by itself is not informative.
 Its value is only meaningful when two models are compared which are fit to the same data, but only differ in their random effects.
 A lower value means that the model is a better fit to the data.
-For models with non-linear patterns, the REML label is replaced by fREML.
-
+For models with non-linear patterns, the REML label is replaced by **fREML**.
 - **Scale est.** represents the variance of the residuals.
-
 - **n** is the number of data points in the model.
-
 ## Step 2: Include a smooth for change in F0 over time
 ```r
 m2 <- bam(semitone.norm ~ cat + s(point, by=cat,bs="tp", k=9), data=data)
@@ -186,11 +182,7 @@ summary(m2)
 
 - `Ref.df`: the reference number of degrees of freedom used for hypothesis testing
 - `edf`: the number of effective degrees of freedom, the amount of non-linearity of the smooth. Greater value indicates more complex pattern.
-- `R-sq`: the amount of variance explained by the regression
-- `Deviance explained`:a generalization of R-sq, basically the same as R-sq
-- `fREML`: no meaning by itself, used for comparing models
-- `Scale est.`: the variance of the residuals
-- `n`: the number of data points
+
 
 ```r
 ## Check the model
