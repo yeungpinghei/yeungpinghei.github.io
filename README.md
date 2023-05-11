@@ -44,7 +44,8 @@ In the next section, I will provide a step-by-step guide on how I used GAMM to a
 >My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it should be available soon on the conference wrbsite.
 <div class="extended-markdown tip border rounded-1 mb-4 p-3 color-border-accent-emphasis color-bg-accent f5">
   <p>
-    "Word."
+    I will present my findings at ICPhS 2023 this August, so please come if you want to know more about my   study!
+    My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it should be available soon on the conference wrbsite.
   </p>
 </div>
   
