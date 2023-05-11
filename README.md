@@ -300,6 +300,19 @@ summary(m7)
 <img src="/docs/m7_summary.png" alt="m7_summary" width="50%">
 
 ## Step 8: Compare Hong Kong English and American English
+```r
+# Combine the two variables
+data$cat.variety <- interaction(data$cat, data$variety)
+# It takes a while to load...
+m8 <- bam(semitone.norm ~ cat.variety +
+            te(point, repetition, k=3) +
+            s(point, speaker, by=cat, bs="fs", m=1) +
+            s(point, word, by=variety, bs="fs", m=1),
+          data=data)
+summary(m8)
+```
+
+<img src="/docs/m8_summary.png" alt="m8_summary" width="50%">
 
 ## Step 9: Final model
 `discrete` and `nthreads` helps you to speed up the calculation
@@ -335,6 +348,7 @@ m.full.noar <- bam(semitone.norm ~ cat.variety +
                    discrete = TRUE, nthreads = parallel::detectCores(logical = FALSE) - 1,
                    data = data)
 summary(m.full.noar)
+```
 
 ```r
 m.full.acf <- acf_resid(m.full.noar)
@@ -355,7 +369,7 @@ m.full <- bam(semitone.norm ~ cat.variety +
               data = data
 summary(m.full)
 ```
-
+<img src="/docs/m9_summary.png" alt="m9_summary" width="50%">
 
 ## Step 10: Visualize the output of the final GAMM
 ```r
