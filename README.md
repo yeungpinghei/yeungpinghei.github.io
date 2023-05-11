@@ -148,12 +148,13 @@ The argument `method` specifies the estimation method we use for the smoothing p
 We will start from here and expand our model bit by bit.
 ```r
 m1 <- bam(semitone.norm ~ cat, data=data, method="fREML")
+```
+To obtain a summary of the model, we can use the `summary()` function.
+```r
 summary(m1)
 ```
-
 <img src="/docs/m1_summary.png" alt="m1_summary" width="50%">
 
-To obtain a summary of the model, we can use the `summary()` function.
 First part of the model summary:
 - The family of model used (Gaussian model), the link function (identity) and the model formula.
 
