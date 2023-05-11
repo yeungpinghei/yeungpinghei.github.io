@@ -6,7 +6,7 @@ Georgetown University
 May 11, 2023</p>
 
 ## What is GAMM?
-Generalized Additive Mixed Models (<a href="https://www.taylorfrancis.com/books/mono/10.1201/9781315370279/generalized-additive-models-simon-wood">GAMMs; Wood 2017</a>) are an extension of Generalized Linear Mixed Models that allow for more flexible modeling of non－linear relationships between the depdendent and independent variables.
+Generalized Additive Mixed Models (<a href="https://www.taylorfrancis.com/books/mono/10.1201/9781315370279/generalized-additive-models-simon-wood">GAMMs; Wood 2017</a>) are an extension of Generalized Linear Mixed Models that allow for more flexible modeling of nonlinear relationships between the depdendent and independent variables.
 A relatively new approach, GAMMs have received increased attention in recent sociophonetic studies that involve the analysis of vowel formants (<a href="https://doi.org/10.1121/1.5089886">Kirkham et al., 2019</a>; <a href="https://doi.org/10.1177/00754242211043163">Stanley et al., 2021</a>) and articulatory measurements (<a href="https://doi.org/10.5334/labphon.214">Carignan et al., 2020</a>).
 GAMMs are comparable to linear mixed effect modeling, but they differ in how they model the relationships between depdendent and independent variables.
 In linear mixed effect modeling, the relationships between the variables are typically modeled using linear functions.
