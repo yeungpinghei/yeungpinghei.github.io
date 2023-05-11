@@ -153,6 +153,7 @@ plot_diff(m2, view="point", comp=list(cat=c("content","function")))
 ![plot_smooth](/docs/plot_smooth_m2.png)
 ![plot_diff](/docs/plot_diff_m2.png)
 
+<head>
 <style>
       .image-container {
         display: flex;
@@ -162,6 +163,7 @@ plot_diff(m2, view="point", comp=list(cat=c("content","function")))
         padding: 5px;
       }
 </style>
+</head>
     
 <div class="image-container">
   <img src="/docs/plot_smooth_m2.png" alt="plot_smooth">
