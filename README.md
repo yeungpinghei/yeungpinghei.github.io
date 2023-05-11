@@ -153,6 +153,10 @@ plot_diff(m2, view="point", comp=list(cat=c("content","function")))
 ![plot_smooth](/docs/plot_smooth_m2.png)
 ![plot_diff](/docs/plot_diff_m2.png)
 
+<div class="image-container">
+  <img src="/docs/plot_smooth_m2.png" alt="plot_smooth">
+  <img src="/docs/plot_diff_m2.png" alt="plot_diff">
+</div>
 
 ## Step 3: Include random intercepts for speakers and words
 **Question**: What is the difference between random intercepts and random slopes?
