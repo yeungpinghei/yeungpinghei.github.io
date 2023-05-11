@@ -1,4 +1,7 @@
 # An introduction to Generalised Additive Mixed Models (GAMMs)
+Author: Ping Hei Yung
+Georgetown University
+May 11, 2023
 
 ## What is GAMM?
 
@@ -129,13 +132,14 @@ summary(m2)
 <img src="/docs/m2_summary.png" alt="m2_summary" width="50%">
 
 **Question**: How do we interpret the results?
-`Ref.df`: the reference number of degrees of freedom used for hypothesis testing
-`edf`: the number of effective degrees of freedom, the amount of non-linearity of the smooth. Greater value indicates more complex pattern.
-`R-sq`: the amount of variance explained by the regression
-`Deviance explained`:a generalization of R-sq, basically the same as R-sq
-`fREML`: no meaning by itself, used for comparing models
-`Scale est.`: the variance of the residuals
-`n`: the number of data points
+
+- `Ref.df`: the reference number of degrees of freedom used for hypothesis testing
+- `edf`: the number of effective degrees of freedom, the amount of non-linearity of the smooth. Greater value indicates more complex pattern.
+- `R-sq`: the amount of variance explained by the regression
+- `Deviance explained`:a generalization of R-sq, basically the same as R-sq
+- `fREML`: no meaning by itself, used for comparing models
+- `Scale est.`: the variance of the residuals
+- `n`: the number of data points
 
 ```r
 ## Check the model
@@ -167,7 +171,54 @@ plot_diff(m2, view="point", comp=list(cat=c("content","function")))
   <img src="/docs/plot_diff_m2.png" alt="plot_diff">
 </div>
 
+```r
+m2 %>%
+  get_gam_predictions(point, series_length = 150, exclude_random = TRUE) -> m2.predictions
+m2.predictions %>%
+  ggplot(aes(point * 10, semitone.norm)) +
+  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = cat, group = cat), alpha = 0.2) +
+  geom_line(aes(colour = cat)) +
+  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) + 
+  scale_y_continuous(name = "F0 (normalized)") +
+  scale_color_discrete(name = "Syntactic category", labels = c("Content words","Function words")) +
+  scale_fill_discrete(name = "Syntactic category", labels = c("Content words","Function words")) +
+  theme_minimal(base_size = 14)
+```
+![m2.predictions](/docs/m2.predictions.png)
+
+
+```r
+m2 %>%
+  get_smooths_difference(point, list(cat = c("content", "function"))) -> m2.diff
+m2.diff %>%
+  ggplot(aes(point*10, difference, group = group)) +
+  geom_hline(aes(yintercept = 0), colour = "darkred") +
+  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = sig_diff), alpha = 0.3) +
+  geom_line(aes(colour = sig_diff), size = 1) +
+  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) +
+  labs(colour = "Significant", fill = "Significant") +
+  theme_minimal(base_size = 14)
+```
+![m2.diff](/docs/m2.diff.png)
+
 ## Step 3: Include random intercepts for speakers and words
+```r
+m3 <- bam(semitone.norm ~ cat +
+                s(point, by=cat, k=9) +
+                s(speaker,bs="re") +
+                s(word, bs="re"),
+              data=data)
+summary(m3)
+```
+<img src="/docs/m3_summary.png" alt="m3_summary" width="50%">
+
+```r
+# Model comparison
+compareML(m2,m3)
+```
+<img src="/docs/m2_m3_compare.png" alt="compare" width="50%">
+The model with a lower AIC is better.
+
 **Question**: What is the difference between random intercepts and random slopes?
 
 Some speakers or words will on average have a higher F0 than others, and this structural variability is captured by a by-speaker or by-word random intercepts.
@@ -175,9 +226,29 @@ On the other hand, the exact difference in F0 between content and function words
 Random slopes allow the influence of a predictor to vary for each level of the random-effect factor.
 
 ## Step 4: Include by-speaker random slopes
+```r
+m4 <- bam(semitone.norm ~ cat +
+                s(point, by=cat, k=9) +
+                s(word, bs="re") +
+                s(speaker, cat, bs="re"),
+              data=data)
+summary(m4)
+```
+
+<img src="/docs/m4_summary.png" alt="m4_summary" width="50%">
+
 
 ## Step 5: Include non-linear random effects
-The smooth specification `s(point, speaker, by=cat, bs="fs",m=1)` replaces the random intercept s(speaker, bs="re").
+```r
+m5 <- bam(semitone.norm ~ cat +
+                s(word, bs="re") +
+                s(point, speaker, by=cat, bs="fs", m=1),
+              data=data)
+summary(m5)
+```
+<img src="/docs/m4_summary.png" alt="m5_summary" width="50%">
+
+The smooth specification `s(point, speaker, by=cat, bs="fs",m=1)` replaces the random intercept `s(speaker, bs="re")`.
 The factor smooth `("fs")` models non-linear difference over time (the first parameter) with respect to the general time pattern for each of the speakers (the second parameter: the random-effect factor)
 The final parameter, `m`, indicates the order of the non-linearity penalty.
 `by=cat` allows for individual variability in the effect of syntactic category.
