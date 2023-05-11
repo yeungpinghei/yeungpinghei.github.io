@@ -118,13 +118,21 @@ m1 <- bam(semitone.norm ~ cat, data=data, method="fREML")
 summary(m1)
 ```
 
-<p>Family: gaussian  Link function: identity</p>
+<p>Family: gaussian <br>
+Link function: identity</p>
 
-<p>Formula: semitone.norm ~ cat</p>
+<p>Formula:<br>
+semitone.norm ~ cat</p>
 
-<p>Parametric coefficients:  Estimate Std. Error t value Pr(>|t|)  (Intercept) 0.227742 0.007747 29.40 <2e-16 *** catfunction -0.478826 0.011004 -43.51 <2e-16 *** 
+<p>Parametric coefficients:<br>
+ Estimate Std. Error t value Pr(>|t|) <br>
+(Intercept) 0.227742 0.007747 29.40 <2e-16 ***<br>
+catfunction -0.478826 0.011004 -43.51 <2e-16 ***<br>
+---</p>
 
-<p> R-sq.(adj) = 0.0581 Deviance explained = 5.81% -REML = 42441 Scale est. = 0.92928 n = 30699</p>
+<p>
+R-sq.(adj) = 0.0581 Deviance explained = 5.81%<br>
+-REML = 42441 Scale est. = 0.92928 n = 30699</p>
 
 ## Step 2: Include a smooth for change in F0 over time
 
