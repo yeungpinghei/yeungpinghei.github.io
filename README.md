@@ -39,8 +39,10 @@ However, just by looking at the raw F0 contour alone is not enough to answer my 
 How do I know if the difference is statistically significant?
 In the next section, I will provide a step-by-step guide on how I used GAMM to analyze me data.
 
+---
 I will present my findings at ICPhS 2023 this August, so please come if you want to know more about my study!
 My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it should be available soon on the conference website.
+---
 
 ## A brief introduction of the data
 First, download the R script and the csv file from the Github repository.
@@ -78,42 +80,42 @@ for_graph %>%
   theme_minimal(base_size = 18)
 ```
 
-## STEP 1: The most basic linear model
+## Step 1: The most basic linear model
 
-## STEP 2: Include a smooth for change in F0 over time
+## Step 2: Include a smooth for change in F0 over time
 
-## STEP 3: Include random intercepts for speakers and words
+## Step 3: Include random intercepts for speakers and words
 **Question**: What is the difference between random intercepts and random slopes?
 
 Some speakers or words will on average have a higher F0 than others, and this structural variability is captured by a by-speaker or by-word random intercepts.
 On the other hand, the exact difference in F0 between content and function words may vary per speaker. 
 Random slopes allow the influence of a predictor to vary for each level of the random-effect factor.
 
-## STEP 4: Include by-speaker random slopes
+## Step 4: Include by-speaker random slopes
 
-## STEP 5: Include non-linear random effects
+## Step 5: Include non-linear random effects
 The smooth specification `s(point, speaker, by=cat, bs="fs",m=1)` replaces the random intercept s(speaker, bs="re").
 The factor smooth `("fs")` models non-linear difference over time (the first parameter) with respect to the general time pattern for each of the speakers (the second parameter: the random-effect factor)
 The final parameter, `m`, indicates the order of the non-linearity penalty.
 `by=cat` allows for individual variability in the effect of syntactic category.
 Random intercepts for speakers and words are dropped because the difference is incorporated by the non-centered factor smooth
 
-## STEP 6: Account for autocorrelation in the residuals
+## Step 6: Account for autocorrelation in the residuals
 
-## STEP 7: Include two-dimensional interaction
+## Step 7: Include two-dimensional interaction
 Interaction of two numerical predictors: time and repetition
 Since the predictors are not on the same scale, a tensor product smooth interaction is used.
 
-## STEP 8: Compare Hong Kong English and American English
+## Step 8: Compare Hong Kong English and American English
 
-## STEP 9: Final model
+## Step 9: Final model
 `discrete` and `nthreads` helps you to speed up the calculation
 `discrete` reduces computation time by taking advantage of the fact that numerical predictors often only have a modest number of unique (rounded) values.
 `nthreads` speeds up the computation by using multiple processors in parallel to obtain the model fit.
 
 Remeber to save the full model because we don't want to wait every time we run the script.
 
-## STEP 10: Visualize the output of the final GAMM
+## Step 10: Visualize the output of the final GAMM
 ```r
 diff %>%
   ggplot(aes(point*10, difference, group = group)) +
