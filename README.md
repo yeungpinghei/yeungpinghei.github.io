@@ -56,7 +56,7 @@ My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it s
 
 ---
 
-## A brief introduction of the data
+## Step 0: A brief introduction of the data
 First, download the R script **gamm_tutorial.R** and the csv file **gamm_tutorial.csv** from the <a href="https://github.com/yeungpinghei/yeungpinghei.github.io/tree/main">Github repository</a>.
 
 Open the R script on RStudio and load the packages we need.
@@ -141,7 +141,7 @@ However, this graph does not the consider the effect of other factors on pitch p
 Thus, the effect of syntactic category on F0 may be overestimated.
 
 ## Step 1: The most basic linear model
-In this step, we construct a very basic linear regression model using the `bam()` function with the normalized F0 `semitone.norm` as the dependent variable and the syntactic category `cat` as the independent variable. The argument `data` refers to the data frame containing the model response variable and covariates required by the formula, which is named as `data`. The argument `method` refers to the estimation method we use for thesmoothing parameter. Here we may use the default method which is `"fREML"`. We will start from here and expand our model bit by bit.
+In this step, we construct a very basic linear regression model using the `bam()` function with the normalized F0 `semitone.norm` as the dependent variable and the syntactic category `cat` as the independent variable. The argument `data` refers to the data frame containing the model response variable and covariates required by the formula, which is named as **data**. The argument `method` refers to the estimation method we use for thesmoothing parameter. Here we may use the default method which is `"fREML"`. We will start from here and expand our model bit by bit.
 ```r
 m1 <- bam(semitone.norm ~ cat, data=data, method="fREML")
 summary(m1)
