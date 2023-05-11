@@ -93,7 +93,7 @@ summary(data)
 ```
 
 | word | adjacent | speaker | variety | age | gender | duration | repetition | point | F0 | token | semitone.norm | cat |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | an | null.son | AME_007 | AE | 19 | F | 0.429388633 | 3 | 8 | 200.8319991 | AE_007-an-3 | 0.634121036 | function |
 | an | null.son | HKE_024 | HKE | 28 | F | 0.277847326 | 1 | 1 | 211.5430769 | HKE_024-an-1 | 1.173468235 | function |
 | an | null.son | AME_013 | AE | 21 | M | 0.363250934 | 1 | 5 | 139.3838609 | AE_013-an-1 | -0.285611094 | function |
