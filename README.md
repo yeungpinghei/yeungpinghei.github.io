@@ -150,9 +150,6 @@ We may visualize the results of GAMM using `plot_smooth()` and `plot_diff()`
 plot_smooth(m2, view="point", plot_all= "cat", rug=FALSE)
 plot_diff(m2, view="point", comp=list(cat=c("content","function")))
 ```
-![plot_smooth](/docs/plot_smooth_m2.png)
-![plot_diff](/docs/plot_diff_m2.png)
-
 <head>
 <style>
       .image-container {
