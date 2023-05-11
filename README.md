@@ -92,18 +92,18 @@ data <- data %>%
 summary(data)
 ```
 
-|word|adjacent|speaker|variety|age|gender|duration|repetition|point|F0|token|semitone.norm|cat|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|an|null.son|AME_007|AE|19|F|0.429388633|3|8|200.8319991|AE_007-|an-3|0.634121036|function|
-|an|null.son|HKE_024|HKE|28|F|0.277847326|1|1|211.5430769|HKE_024-|an-1|1.173468235|function|
-|an|null.son|AME_013|AE|21|M|0.363250934|1|5|139.3838609|AE_013-|an-1|-0.285611094|function|
-|an|null.son|HKE_006|HKE|19|F|0.354345514|1|2|242.4686589|HKE_006-|an-1|-0.003444452|function|
-|an|null.son|HKE_012|HKE|24|M|0.164787882|2|4|97.84136779|HKE_012-|an-2|-0.064295015|function|
-|an|null.son|HKE_023|HKE|30|M|0.227550751|1|5|116.2275949|HKE_023-|an-1|-0.517019108|function|
-|an|null.son|AME_023|AE|20|F|0.390254703|1|6|201.8185885|AE_023-|an-1|-0.289436547|function|
-|an|null.son|HKE_010|HKE|38|F|0.247996446|1|9|140.0242878|HKE_010-|an-1|-1.458272919|function|
-|an|null.son|AME_033|AE|18|M|0.207696414|2|2|93.90499073|AE_033-|an-2|-1.735087432|function|
-|an|null.son|HKE_038|HKE|35|F|0.22003899|2|5|180.9764375|HKE_038-|an-2|-0.992133573|function|
+| word | adjacent | speaker | variety | age | gender | duration | repetition | point | F0 | token | semitone.norm | cat |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| an | null.son | AME_007 | AE | 19 | F | 0.429388633 | 3 | 8 | 200.8319991 | AE_007- | an-3 | 0.634121036 | function |
+| an | null.son | HKE_024 | HKE | 28 | F | 0.277847326 | 1 | 1 | 211.5430769 | HKE_024- | an-1 | 1.173468235 | function |
+| an | null.son | AME_013 | AE | 21 | M | 0.363250934 | 1 | 5 | 139.3838609 | AE_013- | an-1 | -0.285611094 | function |
+| an | null.son | HKE_006 | HKE | 19 | F | 0.354345514 | 1 | 2 | 242.4686589 | HKE_006- | an-1 | -0.003444452 | function |
+| an | null.son | HKE_012 | HKE | 24 | M | 0.164787882 | 2 | 4 | 97.84136779 | HKE_012- | an-2 | -0.064295015 | function |
+| an | null.son | HKE_023 | HKE | 30 | M | 0.227550751 | 1 | 5 | 116.2275949 | HKE_023- | an-1 | -0.517019108 | function |
+| an | null.son | AME_023 | AE | 20 | F | 0.390254703 | 1 | 6 | 201.8185885 | AE_023- | an-1 | -0.289436547 | function |
+| an | null.son | HKE_010 | HKE | 38 | F | 0.247996446 | 1 | 9 | 140.0242878 | HKE_010- | an-1 | -1.458272919 | function |
+| an | null.son | AME_033 | AE | 18 | M | 0.207696414 | 2 | 2 | 93.90499073 | AE_033- | an-2 | -1.735087432 | function |
+| an | null.son | HKE_038 | HKE | 35 | F | 0.22003899 | 2 | 5 | 180.9764375 | HKE_038- | an-2 | -0.992133573 | function |
 
 In in csv file, each row represents an F0 measurement, with columns:
 
