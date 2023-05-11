@@ -36,7 +36,7 @@ Listen to it:
   <source src="https://raw.githubusercontent.com/yeungpinghei/yeungpinghei.github.io/docs/HKE_example.wav" type="audio/wav">
 </audio>
 <br>
-On the other hand, speakers of American English like the one in **Figure 2** seem to produce both the ceontent words and the function words with the same pitch.
+On the other hand, speakers of American English like the one in **Figure 2** seem to produce both the content words and the function words with the same pitch.
 You may compare the two figures and see how they differ.
 
 **Figure 2**: The F0 contour of a American English speaker saying ***Say four again*** and ***Say for again***:
@@ -47,8 +47,8 @@ Listen to it:
 </audio>
 <br>
 However, just by looking at the raw F0 contour alone is not enough to answer my research question.
-How do I know if the difference is statistically significant?
-In the next section, I will provide a step-by-step guide on how I used GAMM to analyze me data.
+How do I know if the difference between Hong Kong English and American English is statistically significant?
+In the next section, I will provide a step-by-step guide on how I used GAMM to analyze the data.
 
 ---
 I will present my findings at <a href="https://www.icphs2023.org/">ICPhS 2023</a> this August, so please come if you want to know more about my study!
@@ -57,9 +57,9 @@ My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it s
 ---
 
 ## A brief introduction of the data
-First, download the R script **gamm_tutorial.R** and the csv file **gamm_tutorial.csv** from the Github repository.
+First, download the R script **gamm_tutorial.R** and the csv file **gamm_tutorial.csv** from the <a href="https://github.com/yeungpinghei/yeungpinghei.github.io/tree/main">Github repository</a>.
 
-Load the packages we need for the R script.
+Open the R script on RStudio and load the packages we need.
 ```r
 # Load the packages
 library(tidyverse)
@@ -107,7 +107,7 @@ In in csv file, each row represents an F0 measurement, with columns:
 -  `cat`: the syntactic category of the target word, content word (content) or function word (function)
 - `adjacent`: the onset and coda consonants of the target word
 
-First, we visualize the original data to check how it looks like before applying any statistical models.
+Before applying any statistical models, we may first visualize the original data to check how they looks like.
 
 ```r
 # Normalized F0 trajectory of each token by individual speakers
@@ -119,7 +119,7 @@ data %>%
 
 <img src="/docs/line_all.png" alt="Many lines" width="70%">
 
-Here we have the normalized F0 contours of each speaker, but there's not much we can get from the graph since individual lines are messy.
+Here we have the normalized F0 contours of each speaker, but it's hard for us to pick up any patterns from the graph since the individual lines are messy.
 
 Let's make a `geom_smooth` plot to see what speakers of Hong Kong English and American English did in general.
 
@@ -134,19 +134,21 @@ data %>%
 ```
 <img src="/docs/smooth_variety.png" alt="geom_smooth">
 
-We can observe that speakers of Hong Kong English and American English produced the content words and function words with differnt pitch contours.
-As indicated by the 95% confidence interval (the shaded area), there is a complete overlap of pitch contour for American English speakers.
-Speakers of Hong Kong English on the other hand produced the content words with a much higher F0 than the function words, and there is no overlap of the confidence interval.
+We can see that speakers of Hong Kong English and American English produced the content words and function words with differnt pitch contours.
+As indicated by the overlap of the 95% confidence interval (the shaded area), the pitch contour of content words and function words did not differ significantly for American English speakers.
+Speakers of Hong Kong English on the other hand produced the content words with a much higher F0 than the function words, and there was no overlap of the confidence intervals.
 However, this graph does not the consider the effect of other factors on pitch production like adjacent segments, number of repetion and duration, which may all contribute to the F0 difference.
-Thus, the F0 difference by syntactic category may be exaggerated.
+Thus, the effect of syntactic category on F0 may be overestimated.
 
 ## Step 1: The most basic linear model
+In this step, we construct a very basic linear regression model using the `bam()` function with the normalized F0 `semitone.norm` as the dependent variable and the syntactic category `cat` as the independent variable. We will start from here and expand our model bit by bit.
 ```r
 m1 <- bam(semitone.norm ~ cat, data=data, method="fREML")
 summary(m1)
 ```
 
 <img src="/docs/m1_summary.png" alt="m1_summary" width="50%">
+The model summary shows that
 
 ## Step 2: Include a smooth for change in F0 over time
 ```r
