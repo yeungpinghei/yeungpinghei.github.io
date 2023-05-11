@@ -40,11 +40,11 @@ How do I know if the difference is statistically significant?
 In the next section, I will provide a step-by-step guide on how I used GAMM to analyze me data.
 
 ---
-I will present my findings at ICPhS 2023 this August, so please come if you want to know more about my study!
-My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it should be available soon on the conference website.
+>I will present my findings at ICPhS 2023 this August, so please come if you want to know more about my study!
+>My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it should be available soon on the conference website.
 
 ---
-<br>
+
 ## A brief introduction of the data
 First, download the R script and the csv file from the Github repository.
 
