@@ -1,5 +1,5 @@
 # An introduction to Generalised Additive Mixed Models (GAMMs)
-<p style="font-size: 24px;">Author: Ping Hei Yung
+<p style="font-size: 24px;">Author: Ping Hei Yeung
   <br>
 Georgetown University
   <br>
@@ -219,6 +219,7 @@ summary(m3)
 compareML(m2,m3)
 ```
 <img src="/docs/m2_m3_compare.png" alt="compare" width="50%">
+
 The model with a lower AIC is better.
 
 **Question**: What is the difference between random intercepts and random slopes?
@@ -248,7 +249,9 @@ m5 <- bam(semitone.norm ~ cat +
               data=data)
 summary(m5)
 ```
-<img src="/docs/m4_summary.png" alt="m5_summary" width="50%">
+<img src="/docs/m5_summary.png" alt="m5_summary" width="50%">
+
+It may start to take more time to run the code since the model is getting more complex.
 
 The smooth specification `s(point, speaker, by=cat, bs="fs",m=1)` replaces the random intercept `s(speaker, bs="re")`.
 The factor smooth `("fs")` models non-linear difference over time (the first parameter) with respect to the general time pattern for each of the speakers (the second parameter: the random-effect factor)
@@ -257,10 +260,44 @@ The final parameter, `m`, indicates the order of the non-linearity penalty.
 Random intercepts for speakers and words are dropped because the difference is incorporated by the non-centered factor smooth
 
 ## Step 6: Account for autocorrelation in the residuals
+```r
+m5.acf <- acf_resid(m5)
+data <- data %>%
+  arrange(speaker, word, repetition, point) %>%
+  group_by(speaker, word, repetition) %>%
+  mutate(start.event = case_when(point == min(point) ~ TRUE, TRUE ~ FALSE), .after = point)
+```
+<img src="/docs/acf_resid.png" alt="acf_resid">
+
+```r
+m6 <- bam(semitone.norm ~ cat +
+                s(word, bs="re") +
+                s(point, speaker, by=cat, bs="fs", m=1),
+              data=data,
+              rho=m5.acf[2], AR.start=data$start.event)
+summary(m6)
+```
+<img src="/docs/m6_summary.png" alt="m6_summary" width="50%">
+
+```r
+compareML(m5,m6)
+```
+<img src="/docs/m5_m6_compare.png" alt="compare" width="50%">
 
 ## Step 7: Include two-dimensional interaction
 Interaction of two numerical predictors: time and repetition
 Since the predictors are not on the same scale, a tensor product smooth interaction is used.
+
+```r
+m7 <- bam(semitone.norm ~ cat +
+                te(point, repetition, k=3) +
+                s(word, bs="re") +
+                s(point, speaker, by=cat, bs="fs", m=1),
+              data=data)
+summary(m7)
+```
+
+<img src="/docs/m7_summary.png" alt="m7_summary" width="50%">
 
 ## Step 8: Compare Hong Kong English and American English
 
