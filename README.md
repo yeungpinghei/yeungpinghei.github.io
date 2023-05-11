@@ -373,6 +373,35 @@ summary(m.full)
 
 ## Step 10: Visualize the output of the final GAMM
 ```r
+m.full.predictions <- m.full %>%
+  get_predictions(cond = list(cat.variety = c("content.AE","function.AE","content.HKE","function.HKE"), point=seq(1,9,0.1))) %>%
+  mutate(lower = fit - CI, upper = fit + CI)
+m.full.predictions <- separate(m.full.predictions, cat.variety, c("cat","variety"))
+m.full.predictions %>%
+  ggplot(aes(point * 10, fit)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper, fill = cat, group = cat), alpha = 0.2) +
+  geom_line(aes(colour = cat)) +
+  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) + 
+  scale_y_continuous(name = "Predicted F0 (z-score)") +
+  scale_color_discrete(name = "Syntactic category", breaks = c("content","function"), labels = c("Content word","Function word")) +
+  scale_fill_discrete(name = "Syntactic category", breaks = c("content","function"), labels = c("Content word","Function word")) +
+  theme_minimal(base_size = 18) +
+  facet_wrap(~variety)
+```
+
+<img src="/docs/gamm_result.png" alt="gamm_result">
+
+```r
+m.full %>%
+  get_smooths_difference(point, list(cat.variety = c("function.HKE","content.HKE"))) -> hke.diff
+hke.diff <- hke.diff %>%
+  mutate(cat="function word - content word")
+m.full %>%
+  get_smooths_difference(point, list(cat.variety = c("function.AE","content.AE"))) -> ame.diff
+ame.diff <- ame.diff %>%
+  mutate(cat="function word - content word",variety = "AE")
+diff <- rbind(hke.diff,ame.diff)
+diff$variety = factor(diff$variety, levels=c('AE','HKE'))
 diff %>%
   ggplot(aes(point*10, difference, group = group)) +
   geom_hline(aes(yintercept = 0), colour = "darkred") +
@@ -387,3 +416,4 @@ diff %>%
   facet_grid(cat~variety)
 ```
 
+<img src="/docs/gamm_diff.png" alt="gamm_diff">
