@@ -154,15 +154,14 @@ summary(m1)
 <img src="/docs/m1_summary.png" alt="m1_summary" width="50%">
 
 To obtain a summary of the model, we can use the `summary()` function.
-To top line of the model summary shows the family of model used (Gaussian model), the link function (identity) and the model formula.
-The next block shows the parametric coefficients.
-The intercept is the value of the dependent variable when all numerical predictors are equal to 0 and nominal variables are at their reference level.
+- The top line of the model summary: the family of model used (Gaussian model), the link function (identity) and the model formula.
+The next block shows the parametric coefficients:
+- The intercept is the value of the dependent variable when all numerical predictors are equal to 0 and nominal variables are at their reference level.
 Since the reference level for the nominal variable `cat` is 'content', the average normalized F0 of content words is about 0.23.
-The line associated with catfunction (function word, the non-reference level) indicates that the normalized F0 of function words is about 0.48 lower than that of content words, and this difference is significant with a very small p-value (p<2e-16).
+- The line associated with catfunction (function word, the non-reference level) indicates that the normalized F0 of function words is about 0.48 lower than that of content words, and this difference is significant with a very small p-value (p<2e-16).
 
 The final two lines of the summary show the goodness-of-fit statistics.
 - **R-sq.(adj)** represents the amount of variance explained by the regression.
-
 - **Deviance explained** is a generalization of R-sq.
 - **REML** (restricted maximum likelihood) by itself is not informative.
 Its value is only meaningful when two models are compared which are fit to the same data, but only differ in their random effects.
@@ -170,6 +169,7 @@ A lower value means that the model is a better fit to the data.
 For models with non-linear patterns, the REML label is replaced by **fREML**.
 - **Scale est.** represents the variance of the residuals.
 - **n** is the number of data points in the model.
+
 ## Step 2: Include a smooth for change in F0 over time
 ```r
 m2 <- bam(semitone.norm ~ cat + s(point, by=cat,bs="tp", k=9), data=data)
