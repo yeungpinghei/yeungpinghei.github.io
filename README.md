@@ -238,7 +238,7 @@ m4 <- bam(semitone.norm ~ cat +
 summary(m4)
 ```
 
-<img src="/docs/m4_summary.png" alt="m4_summary" width="50%">
+<img src="/docs/m4_summary.png" alt="m4_summary" width="55%">
 
 
 ## Step 5: Include non-linear random effects
@@ -282,7 +282,7 @@ summary(m6)
 ```r
 compareML(m5,m6)
 ```
-<img src="/docs/m5_m6_compare.png" alt="compare" width="50%">
+<img src="/docs/m5_m6_compare.png" alt="compare" width="60%">
 
 ## Step 7: Include two-dimensional interaction
 Interaction of two numerical predictors: time and repetition
@@ -307,6 +307,55 @@ summary(m7)
 `nthreads` speeds up the computation by using multiple processors in parallel to obtain the model fit.
 
 Remeber to save the full model because we don't want to wait every time we run the script.
+```r
+# Save the full model because we don't want to wait every time we run the script
+saveRDS(m.full, file = "gamm_result.rds")
+```
+
+```r
+# Load the saved GAMM results to save your time
+m.full <- readRDS("gamm_result.rds")
+```
+
+
+```r
+m.full.noar <- bam(semitone.norm ~ cat.variety +
+                     s(point, k=9) +
+                     s(duration) +
+                     s(repetition, k=3) +
+                     s(point, by = cat.variety, k=9) +
+                     ti(point, duration, k=9) + # Fixed interaction of duration x time
+                     ti(point, repetition, k=3) + # Fixed interaction of repetition x time            
+                     s(point, by = adjacent, k=9) + # Difference smooth for syllable structure
+                     # Random Reference/Difference smooths for Speaker/Word
+                     s(point, speaker, bs = 'fs', m = 1, k=9) +
+                     s(point, speaker, by = cat, bs = 'fs', m = 1, k=9) +
+                     s(point, word, bs = 'fs', m = 1, k=9) +
+                     s(point, word, by = variety, bs = 'fs', m = 1, k=9),
+                   discrete = TRUE, nthreads = parallel::detectCores(logical = FALSE) - 1,
+                   data = data)
+summary(m.full.noar)
+
+```r
+m.full.acf <- acf_resid(m.full.noar)
+m.full <- bam(semitone.norm ~ cat.variety +
+                s(point, k=9) +
+                s(duration) +
+                s(repetition, k=3) +
+                s(point, by = cat.variety, k=9) +
+                ti(point, duration, k=9) +
+                ti(point, repetition, k=3) +                
+                s(point, by = adjacent, k=9) +
+                s(point, speaker, bs = 'fs', m = 1, k=9) +
+                s(point, speaker, by = cat, bs = 'fs', m = 1, k=9) +
+                s(point, word, bs = 'fs', m = 1, k=9) +
+                s(point, word, by = variety, bs = 'fs', m = 1, k=9),
+              rho = m.full.acf[2], AR.start = data$start.event,
+              discrete = TRUE, nthreads = parallel::detectCores(logical = FALSE) - 1,
+              data = data
+summary(m.full)
+```
+
 
 ## Step 10: Visualize the output of the final GAMM
 ```r
