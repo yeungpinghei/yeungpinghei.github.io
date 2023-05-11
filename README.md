@@ -43,7 +43,10 @@ I will present my findings at ICPhS 2023 this August, so please come if you want
 My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it should be available soon on the conference website.
 
 ## A brief introduction of the data
-In this dataset each row is an F0 measurement, with columns:
+First, download the R script and the csv file from the Github repository.
+
+
+In in csv file, each row represents an F0 measurement, with columns:
 
 - `speaker`:  a unique code for each individual speaker
 - `variety`: the English variety spoken by the participant (American English or Hong Kong English)
@@ -60,6 +63,71 @@ In this dataset each row is an F0 measurement, with columns:
 -  `cat`: the syntactic category of the target word (content word or function word)
 - `adjacent`: the onset and coda consonants of the target word
 
+First, we visualize the original data to check how it looks like before applying any statistical models.
+
+```{r}
+for_graph %>%
+  ggplot(aes(x = point*10, y = mean_st, group = cat, color = cat)) +
+  geom_line() +
+  facet_wrap(~variety) +
+  geom_errorbar(aes(ymin=mean_st-sd_st, ymax=mean_st+sd_st), width=2) +
+  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) + 
+  scale_y_continuous(name = "Mean F0 (semitone)") +
+  scale_color_discrete(name = "Syntactic category", breaks = c("content","function"), labels = c("Content word","Function word")) +
+  scale_fill_discrete(name = "Syntactic category", breaks = c("content","function"), labels = c("Content word","Function word")) +
+  theme_minimal(base_size = 18)
+```
+
+## STEP 1: The most basic linear model
+
+## STEP 2: Include a smooth for change in F0 over time
+
+## STEP 3: Include random intercepts for speakers and words
+**Question**: What is the difference between random intercepts and random slopes?
+
+Some speakers or words will on average have a higher F0 than others, and this structural variability is captured by a by-speaker or by-word random intercepts.
+On the other hand, the exact difference in F0 between content and function words may vary per speaker. 
+Random slopes allow the influence of a predictor to vary for each level of the random-effect factor.
+
+## STEP 4: Include by-speaker random slopes
+
+## STEP 5: Include non-linear random effects
+The smooth specification `s(point, speaker, by=cat, bs="fs",m=1)` replaces the random intercept s(speaker, bs="re").
+The factor smooth `("fs")` models non-linear difference over time (the first parameter) with respect to the general time pattern for each of the speakers (the second parameter: the random-effect factor)
+The final parameter, `m`, indicates the order of the non-linearity penalty.
+`by=cat` allows for individual variability in the effect of syntactic category.
+Random intercepts for speakers and words are dropped because the difference is incorporated by the non-centered factor smooth
+
+## STEP 6: Account for autocorrelation in the residuals
+
+## STEP 7: Include two-dimensional interaction
+Interaction of two numerical predictors: time and repetition
+Since the predictors are not on the same scale, a tensor product smooth interaction is used.
+
+## STEP 8: Compare Hong Kong English and American English
+
+## STEP 9: Final model
+`discrete` and `nthreads` helps you to speed up the calculation
+`discrete` reduces computation time by taking advantage of the fact that numerical predictors often only have a modest number of unique (rounded) values.
+`nthreads` speeds up the computation by using multiple processors in parallel to obtain the model fit.
+
+Remeber to save the full model because we don't want to wait every time we run the script.
+
+## Visualize the output of the final GAMM
+```r
+diff %>%
+  ggplot(aes(point*10, difference, group = group)) +
+  geom_hline(aes(yintercept = 0), colour = "darkred") +
+  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = sig_diff), alpha = 0.3) +
+  geom_line(aes(colour = sig_diff), size = 1) +
+  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) +
+  scale_y_continuous(name = "Predicted F0 difference (z-score)") +
+  scale_color_discrete(breaks = c("TRUE","FALSE"), labels = c("Significant","Insignificant")) +
+  scale_fill_discrete(breaks = c("TRUE","FALSE"), labels = c("Significant","Insignificant")) +
+  labs(colour = "", fill = "") +
+  theme_minimal(base_size = 18) +
+  facet_grid(cat~variety)
+```
 
 
 ## h2 Heading
