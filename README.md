@@ -1,6 +1,3 @@
-<head>
-</head>
-
 # An introduction to Generalised Additive Mixed Models (GAMMs)
 
 ## What is GAMM?
