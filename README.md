@@ -43,9 +43,9 @@ My paper is titled *"Contact-induced tonogenesis in Hong Kong English"* and it s
 ---
 
 ## A brief introduction of the data
-First, download the R script and the csv file from the Github repository.
+First, download the R script **gamm_tutorial.R** and the csv file **gamm_tutorial.csv** from the Github repository.
 
-Load the packages we need for the R script
+Load the packages we need for the R script.
 ```r
 # Load the packages
 library(tidyverse)
@@ -53,9 +53,10 @@ library(mgcv)
 library(itsadug)
 library(tidymv)
 ```
-Import the csv file and define the data type of each column
+Import the csv file and define the data type of each column.
 
 ```r
+data <- read_csv("gamm_tutorial.csv", col_names = T)
 data <- data %>%
   mutate_at(c("speaker", "variety", "gender", "word", "token", "cat","adjacent"), as.factor) %>%
   mutate_at(c("age", "duration", "repetition", "point", "F0", "semitone.norm"), as.numeric)
@@ -87,9 +88,11 @@ data %>%
   geom_line() +
   facet_wrap(~speaker)
 ```
-![AE example](/docs/line_all.png)
+
 <img src="/docs/line_all.png" alt="Many lines" width="750" height="700">
+
 Here we have the normalized F0 contours of each speaker, but there's not much we can get from the graph since individual lines are messy.
+
 Let's make a `geom_smooth` plot to see what speakers of Hong Kong English and American English did in general.
 
 ```r
@@ -101,7 +104,13 @@ data %>%
   geom_smooth(method="loess") +
   facet_wrap(~variety)
 ```
+<img src="/docs/smooth_variety.png" alt="geom_smooth">
 
+We can observe that speakers of Hong Kong English and American English produced the content words and function words with differnt pitch contours.
+As indicated by the 95% confidence interval (the shaded area), there is a complete overlap of pitch contour for American English speakers.
+Speakers of Hong Kong English on the other hand produced the content words with a much higher F0 than the function words, and there is no overlap of the confidence interval.
+However, this graph does not the consider the effect of other factors on pitch production like adjacent segments, number of repetion and duration, which may all contribute to the F0 difference.
+Thus, the F0 difference by syntactic category may be exaggerated.
 
 ## Step 1: The most basic linear model
 
