@@ -65,7 +65,7 @@ In in csv file, each row represents an F0 measurement, with columns:
 
 First, we visualize the original data to check how it looks like before applying any statistical models.
 
-```{r}
+```r
 for_graph %>%
   ggplot(aes(x = point*10, y = mean_st, group = cat, color = cat)) +
   geom_line() +
@@ -113,7 +113,7 @@ Since the predictors are not on the same scale, a tensor product smooth interact
 
 Remeber to save the full model because we don't want to wait every time we run the script.
 
-## Visualize the output of the final GAMM
+## STEP 10: Visualize the output of the final GAMM
 ```r
 diff %>%
   ggplot(aes(point*10, difference, group = group)) +
