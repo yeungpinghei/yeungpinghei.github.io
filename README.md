@@ -154,7 +154,8 @@ summary(m1)
 <img src="/docs/m1_summary.png" alt="m1_summary" width="50%">
 
 To obtain a summary of the model, we can use the `summary()` function.
-- The top line of the model summary: the family of model used (Gaussian model), the link function (identity) and the model formula.
+First part of the model summary:
+- The family of model used (Gaussian model), the link function (identity) and the model formula.
 
 Parametric coefficients:
 - The intercept is the value of the dependent variable when all numerical predictors are equal to 0 and nominal variables are at their reference level.
