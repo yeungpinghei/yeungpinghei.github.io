@@ -206,7 +206,7 @@ The values we have are 5.317 and 4.938, which are not close to the maximum of 8.
 It means that the k value we chose is suitable for our model.
 
 
-We may visualize the results of GAMM using `plot_smooth()` and `plot_diff()`
+We may visualize the results of GAMM using `plot_smooth()` and `plot_diff()` from the *itsadug* package.
 Visualization is essential since the model summary may not give you the full picture on the effects of the independent variable.
 While it is possible to summarize a linear pattern in only a single line, this is obviously not possible for a non-linear pattern like F0 trajectory.
 Therefore, model summaries are not able to tell you which part of the word contributes to the statistical significance.
@@ -217,6 +217,21 @@ By plotting the results of GAMMs, we may find out the exact time intervals with 
 plot_smooth(m2, view="point", plot_all= "cat", rug=FALSE)
 plot_diff(m2, view="point", comp=list(cat=c("content","function")))
 ```
+
+The first parameter is the name of the model, which is `m2` in this case.
+The second paramter `view` is set to the variable we want to visualize, which is *'point'*.
+The parameter `plot_all`, which is only present in `plot_smooth()`, is set to the nominal variable of syntactic category `cat`.
+The parameter `comp`, which is only present in `plot_diff()` specifies the list of the variables what are compared.
+The final parameter `rug` serves to show or suppress small vertical lines on the x-axis for all individual data points.
+This plotting function only visualizes the partial effects of the two non-linear patterns since the other components of the model are not incorporated.
+
+The graph on the left shows the output of `plot_smooth()`, which are the non-linear smooths for function words and content words of the model `m2`.
+The 95% confidence intervals are shown by shaded bands.
+The graph on the right on the other hand shows the output of `plot_diff`, which is the difference between the two non-linear smooths comparing function words and content words of the model `m2`.
+The 95% confidence interval is shown by a shaded band.
+If the confidence interval does not overlap with the x-axis, then the difference is significant.
+As shown in the plot, content words have a significantly higher normalized F0 than function words throughout the entire duration of the words.
+
 <head>
 <style>
       .image-container {
