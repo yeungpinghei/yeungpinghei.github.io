@@ -229,10 +229,10 @@ The graph on the left shows the output of `plot_smooth()`, which indicates the n
 In other words, these are the predicted F0 trajectories of function words and content words according to the model.
 The 95% confidence intervals are shown by shaded bands.
 
-Then, the graph on the right shows the output of `plot_diff`, which is the difference between the two non-linear smooths comparing function words and content words of the model `m2`.
+Then, the graph on the right shows the output of `plot_diff`, which is the difference between the two non-linear smooths of the model `m2` comparing function words and content words.
 The 95% confidence interval is shown by a shaded band.
 If the confidence interval does not overlap with the x-axis, then the difference is significant.
-As shown in the plot, content words have a significantly higher normalized F0 than function words throughout the entire duration of the words.
+As shown in the plot, there is no overlap of the confidence interval, indicating that content words have a significantly higher normalized F0 than function words throughout the entire duration of the words.
 
 <head>
 <style>
