@@ -244,40 +244,6 @@ shown in Fig. 2.
 
 We may visualize the results of GAMM using `plot_smooth()` and `plot_diff()`
 
-You may also plot the results using `ggplot()`, which gives you more freedom to customize the plots.
-You may follow <a href="https://stefanocoretta.github.io/tidymv/articles/plot-smooths.html">the tutorial by Dr. Stefano Coretta</a> to learn more about how to visualize the results of GAMMs using `ggplot()`.
-
-The code to plot model predictions:
-```r
-m2 %>%
-  get_gam_predictions(point, series_length = 150, exclude_random = TRUE) -> m2.predictions
-m2.predictions %>%
-  ggplot(aes(point * 10, semitone.norm)) +
-  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = cat, group = cat), alpha = 0.2) +
-  geom_line(aes(colour = cat)) +
-  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) + 
-  scale_y_continuous(name = "F0 (normalized)") +
-  scale_color_discrete(name = "Syntactic category", labels = c("Content words","Function words")) +
-  scale_fill_discrete(name = "Syntactic category", labels = c("Content words","Function words")) +
-  theme_minimal(base_size = 14)
-```
-![m2.predictions](/docs/m2.predictions.png)
-
-The code to plot difference smooth:
-```r
-m2 %>%
-  get_smooths_difference(point, list(cat = c("content", "function"))) -> m2.diff
-m2.diff %>%
-  ggplot(aes(point*10, difference, group = group)) +
-  geom_hline(aes(yintercept = 0), colour = "darkred") +
-  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = sig_diff), alpha = 0.3) +
-  geom_line(aes(colour = sig_diff), size = 1) +
-  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) +
-  labs(colour = "Significant", fill = "Significant") +
-  theme_minimal(base_size = 14)
-```
-![m2.diff](/docs/m2.diff.png)
-
 
 ```r
 plot_smooth(m2, view="point", plot_all= "cat", rug=FALSE)
@@ -302,6 +268,39 @@ plot_diff(m2, view="point", comp=list(cat=c("content","function")))
 
 
 
+You may also plot the results using `ggplot()`, which gives you more freedom to customize the plots.
+You may follow <a href="https://stefanocoretta.github.io/tidymv/articles/plot-smooths.html">the tutorial by Dr. Stefano Coretta</a> to learn more about how to visualize the results of GAMMs using `ggplot()`.
+
+The code for plotting the model predictions:
+```r
+m2 %>%
+  get_gam_predictions(point, series_length = 150, exclude_random = TRUE) -> m2.predictions
+m2.predictions %>%
+  ggplot(aes(point * 10, semitone.norm)) +
+  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = cat, group = cat), alpha = 0.2) +
+  geom_line(aes(colour = cat)) +
+  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) + 
+  scale_y_continuous(name = "F0 (normalized)") +
+  scale_color_discrete(name = "Syntactic category", labels = c("Content words","Function words")) +
+  scale_fill_discrete(name = "Syntactic category", labels = c("Content words","Function words")) +
+  theme_minimal(base_size = 14)
+```
+![m2.predictions](/docs/m2.predictions.png)
+
+The code for plotting the difference smooth:
+```r
+m2 %>%
+  get_smooths_difference(point, list(cat = c("content", "function"))) -> m2.diff
+m2.diff %>%
+  ggplot(aes(point*10, difference, group = group)) +
+  geom_hline(aes(yintercept = 0), colour = "darkred") +
+  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = sig_diff), alpha = 0.3) +
+  geom_line(aes(colour = sig_diff), size = 1) +
+  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) +
+  labs(colour = "Significant", fill = "Significant") +
+  theme_minimal(base_size = 14)
+```
+![m2.diff](/docs/m2.diff.png)
 
 ## Step 3: Include random intercepts for speakers and words
 ```r
