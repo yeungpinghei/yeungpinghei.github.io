@@ -205,14 +205,79 @@ If the edf value is close to its maximum, then a higher basis dimension might be
 The values we have are 5.317 and 4.938, which are not close to the maximum of 8.
 It means that the k value we chose is suitable for our model.
 
-```r
-## Check the model
-gam.check(m2)
-```
+While it is possible to summarize a linear pattern in only a
+single line, this is obviously not possible for a non-linear
+pattern. Correspondingly, visualization is essential to interpret the non-linear patterns. The command: plot(m2)
+yields the visualizations shown in Fig. 2 (abline(h=0)
+was used to add the horizontal line for the x-axis in both
+visualizations).
+It is important to realize that this plotting function only visualizes the two non-linear patterns without taking into account
+anything else in the model. This means that only the partial
+effects are visualized. It is also good to keep in mind that the
+smooths themselves are centered (i.e. move around the xaxis, y = 0). Visualizing the smooths in this way, i.e. as a partial
+effect, is insightful to identify the non-linear patterns, but it does
+not give any information about the relative height of the
+smooths. For this we need to take into account the full model
+(i.e. the fitted values). Particularly, the intercept and the constant difference between the two smooths shown in the parametric part of the model need to be taken into account. For
+this type of visualization, we use the function plot_smooth
+from the itsadug package as follows:
 
-Low p-value (k-index<1) may indicate that k is too low, especially if edf is close to k'.
+The first parameter is the name of the stored model. The
+parameter view is set to the name of the variable visualized
+on the x-axis. The parameter plot_all should be set to
+the name of the nominal variable if smooths need to be displayed for all levels of this variable. This is generally equal
+to the name of the variable set using the by-parameter in
+the smooth specification. If the parameter is excluded, it only
+shows a graph for a single level (a notification will report
+which level is shown in case there are multiple levels).
+The final parameter rug is used to show or suppress small
+vertical lines on the x-axis for all individual data points.
+Since there are many unique values, we suppress these vertical lines here by setting the value of the parameter to
+FALSE. Fig. 3 shows the result of this call and visualizes
+both patterns in a single graph. It is clear that the smooths
+are not centered (i.e. they represent full effects, rather than
+partial effects), and that the ‘tenth’-curve lies above the
+‘tent’-curve, reflecting that the /h/ is pronounced with a more
+anterior T1 position than the /t/. The shapes of the curves
+are, as would be expected, identical to the partial effects
+shown in Fig. 2.
 
 We may visualize the results of GAMM using `plot_smooth()` and `plot_diff()`
+
+You may also plot the results using `ggplot()`, which gives you more freedom to customize the plots.
+You may follow <a href="https://stefanocoretta.github.io/tidymv/articles/plot-smooths.html">the tutorial by Dr. Stefano Coretta</a> to learn more about how to visualize the results of GAMMs using `ggplot()`.
+
+The code to plot model predictions:
+```r
+m2 %>%
+  get_gam_predictions(point, series_length = 150, exclude_random = TRUE) -> m2.predictions
+m2.predictions %>%
+  ggplot(aes(point * 10, semitone.norm)) +
+  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = cat, group = cat), alpha = 0.2) +
+  geom_line(aes(colour = cat)) +
+  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) + 
+  scale_y_continuous(name = "F0 (normalized)") +
+  scale_color_discrete(name = "Syntactic category", labels = c("Content words","Function words")) +
+  scale_fill_discrete(name = "Syntactic category", labels = c("Content words","Function words")) +
+  theme_minimal(base_size = 14)
+```
+![m2.predictions](/docs/m2.predictions.png)
+
+The code to plot difference smooth:
+```r
+m2 %>%
+  get_smooths_difference(point, list(cat = c("content", "function"))) -> m2.diff
+m2.diff %>%
+  ggplot(aes(point*10, difference, group = group)) +
+  geom_hline(aes(yintercept = 0), colour = "darkred") +
+  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = sig_diff), alpha = 0.3) +
+  geom_line(aes(colour = sig_diff), size = 1) +
+  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) +
+  labs(colour = "Significant", fill = "Significant") +
+  theme_minimal(base_size = 14)
+```
+![m2.diff](/docs/m2.diff.png)
+
 
 ```r
 plot_smooth(m2, view="point", plot_all= "cat", rug=FALSE)
@@ -235,35 +300,8 @@ plot_diff(m2, view="point", comp=list(cat=c("content","function")))
   <img src="/docs/plot_diff_m2.png" alt="plot_diff">
 </div>
 
-```r
-m2 %>%
-  get_gam_predictions(point, series_length = 150, exclude_random = TRUE) -> m2.predictions
-m2.predictions %>%
-  ggplot(aes(point * 10, semitone.norm)) +
-  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = cat, group = cat), alpha = 0.2) +
-  geom_line(aes(colour = cat)) +
-  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) + 
-  scale_y_continuous(name = "F0 (normalized)") +
-  scale_color_discrete(name = "Syntactic category", labels = c("Content words","Function words")) +
-  scale_fill_discrete(name = "Syntactic category", labels = c("Content words","Function words")) +
-  theme_minimal(base_size = 14)
-```
-![m2.predictions](/docs/m2.predictions.png)
 
 
-```r
-m2 %>%
-  get_smooths_difference(point, list(cat = c("content", "function"))) -> m2.diff
-m2.diff %>%
-  ggplot(aes(point*10, difference, group = group)) +
-  geom_hline(aes(yintercept = 0), colour = "darkred") +
-  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = sig_diff), alpha = 0.3) +
-  geom_line(aes(colour = sig_diff), size = 1) +
-  scale_x_continuous(name = "Normalized Time (%)", breaks = seq(0, 100, by=20)) +
-  labs(colour = "Significant", fill = "Significant") +
-  theme_minimal(base_size = 14)
-```
-![m2.diff](/docs/m2.diff.png)
 
 ## Step 3: Include random intercepts for speakers and words
 ```r
