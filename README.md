@@ -209,9 +209,8 @@ It means that the k value we chose is suitable for our model.
 We may visualize the results of GAMM using `plot_smooth()` and `plot_diff()` from the *itsadug* package.
 Visualization is essential since the model summary may not give you the full picture on the effects of the independent variable.
 While it is possible to summarize a linear pattern in only a single line, this is obviously not possible for a non-linear pattern like F0 trajectory.
-Therefore, model summaries are not able to tell you which part of the word contributes to the statistical significance.
-The function words and content words may significantly differ in their F0 only in part of the word but not the whole word.
-By plotting the results of GAMMs, we may find out the exact time intervals with significant difference.
+The function words and content words may significantly differ in their F0 only in part of the word but not the whole word, but model summaries are not able to distinguish that.
+Instead, by plotting the results of GAMMs, we may find out the exact time intervals with significant difference.
 
 ```r
 plot_smooth(m2, view="point", plot_all= "cat", rug=FALSE)
