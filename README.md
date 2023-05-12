@@ -182,11 +182,11 @@ m2 <- bam(semitone.norm ~ cat + s(point, by=cat,bs="tp", k=9), data=data)
 summary(m2)
 ```
 
-Compared to `m1`, the first model, we added the function `s(point, by=cat,bs="tp", k=9)`, a smooth over the time point which the measurement was taken `point`.
+Compared to `m1`, the first model, we added the function `s(point, by=cat,bs="tp", k=9)`, a smooth over `point`, the time point which the measurement was taken.
 The argument `by=cat` means that the smooths were made separately for each level of the nominal variable of syntactic category.
-The `bs` parameter specifies the type of smooth, and in this case is set to "tp", the default thin plate regression spline.
+The `bs` parameter specifies the type of smooth, and in this case is set to *"tp"*, the default thin plate regression spline.
 The `k` parameter sets the size of the basis dimension.
-The value of k cannot exceed the number of possible values of the smooth term.
+The value of *k* cannot exceed the number of possible values of the smooth term.
 Therefore, we set it to 9 as there are only 9 possible values of `point` (F0 was measured at 9 points in time for each token).
 
 <img src="/docs/m2_summary.png" alt="m2_summary" width="50%">
@@ -194,6 +194,7 @@ Therefore, we set it to 9 as there are only 9 possible values of `point` (F0 was
 The summary of the new model has an additional block, the approximate significance of smooth terms.
 Here two lines can be found, **s(point):catcontent**, the smooth for content words and **s(point):catfunction**, the smooth for function words.
 The p-value associated with each smooth indicates if the smooth is significantly different from 0.
+Since both smooths have the p-value of <2e-16 , they are significantly different from 0.
 
 `Ref.df` is the reference number of degrees of freedom used for hypothesis testing (on the basis of the associated F-value).
 `edf` is the number of effective degrees of freedom, which can be seen as an estimate of how many parameters are needed to represent the smooth.
