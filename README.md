@@ -19,7 +19,7 @@ This tutorial is inspired by Wieling (<a href="https://doi.org/10.1016/j.wocn.20
 
 ---
 Check out the tutorial by Winter & Wieling (<a href="https://doi.org/10.1093/jole/lzv003">2016</a>), Sóskuthy (<a href="
-https://doi.org/10.48550/arXiv.1703.05339">2017</a>, <a href="https://doi.org/10.1016/j.wocn.2020.101017">2021</a>), Wieling (<a href="https://doi.org/10.1016/j.wocn.2018.03.002">2018</a>) for more sophisticated explanations on the mechanisms of GAMMs.
+https://doi.org/10.48550/arXiv.1703.05339">2017</a>, <a href="https://doi.org/10.1016/j.wocn.2020.101017">2021</a>), and Wieling (<a href="https://doi.org/10.1016/j.wocn.2018.03.002">2018</a>) for more sophisticated explanations on the mechanisms of GAMMs.
 
 ---
 
