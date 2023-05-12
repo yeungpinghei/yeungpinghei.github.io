@@ -213,28 +213,6 @@ Therefore, model summaries are not able to tell you which part of the word contr
 The function words and content words may significantly differ in their F0 only in part of the word but not the whole word.
 By plotting the results of GAMMs, we may find out the exact time intervals with significant difference.
 
-
-
-
-
-Correspondingly, visualization is essential to interpret the non-linear patterns. The command: plot(m2) yields the visualizations shown in Fig. 2 (abline(h=0)
-was used to add the horizontal line for the x-axis in both visualizations).
-It is important to realize that this plotting function only visualizes the two non-linear patterns without taking into account anything else in the model. This means that only the partial effects are visualized. It is also good to keep in mind that the smooths themselves are centered (i.e. move around the xaxis, y = 0).
-Visualizing the smooths in this way, i.e. as a partial effect, is insightful to identify the non-linear patterns, but it does not give any information about the relative height of the smooths.
-For this we need to take into account the full model (i.e. the fitted values).
-Particularly, the intercept and the constant difference between the two smooths shown in the parametric part of the model need to be taken into account.
-For this type of visualization, we use the function plot_smooth from the itsadug package as follows:
-
-The first parameter is the name of the stored model.
-The parameter view is set to the name of the variable visualized on the x-axis.
-The parameter plot_all should be set to the name of the nominal variable if smooths need to be displayed for all levels of this variable. This is generally equal to the name of the variable set using the by-parameter in the smooth specification.
-If the parameter is excluded, it only shows a graph for a single level (a notification will report which level is shown in case there are multiple levels).
-The final parameter rug is used to show or suppress small vertical lines on the x-axis for all individual data points.
-Since there are many unique values, we suppress these vertical lines here by setting the value of the parameter to FALSE. F
-
-
-
-
 ```r
 plot_smooth(m2, view="point", plot_all= "cat", rug=FALSE)
 plot_diff(m2, view="point", comp=list(cat=c("content","function")))
@@ -255,7 +233,6 @@ plot_diff(m2, view="point", comp=list(cat=c("content","function")))
   <img src="/docs/plot_smooth_m2.png" alt="plot_smooth">
   <img src="/docs/plot_diff_m2.png" alt="plot_diff">
 </div>
-
 
 
 You may also plot the results using `ggplot()`, which gives you more freedom to customize the plots.
