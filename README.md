@@ -224,7 +224,8 @@ The parameter `comp`, which is only present in `plot_diff()` specifies the list 
 The final parameter `rug` serves to show or suppress small vertical lines on the x-axis for all individual data points.
 This plotting function only visualizes the partial effects of the two non-linear patterns since the other components of the model are not incorporated.
 
-The graph on the left shows the output of `plot_smooth()`, which are the non-linear smooths for function words and content words of the model `m2`.
+The graph on the left shows the output of `plot_smooth()`, which indicates the non-linear smooths for function words and content words of the model `m2`.
+In other words, these are the predicted F0 trajectories of function words and content words according to the model.
 The 95% confidence intervals are shown by shaded bands.
 The graph on the right on the other hand shows the output of `plot_diff`, which is the difference between the two non-linear smooths comparing function words and content words of the model `m2`.
 The 95% confidence interval is shown by a shaded band.
