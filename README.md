@@ -324,13 +324,14 @@ The results show that the model `m3.ml` is better since it has a lower AIC score
 Therefore, it is better for us to include the random intercepts.
 
 ## Step 4: Include by-speaker random slopes
-
 **Question**: What is the difference between random intercepts and random slopes?
 
 Some speakers or words will on average have a higher F0 than others, and this structural variability is captured by a by-speaker or by-word **random intercepts**.
 On the other hand, the exact difference in F0 between content and function words may vary per speaker. 
 **Random slopes** allow the influence of a predictor to vary for each level of the random-effect factor.
 
+To include a by-speaker linear random slope for the effect of syntactic category, we can replace `s(speaker,bs="re")` with `s(speaker, cat, bs="re")` to our model.
+It is not recommended to include both smooths in the model since that would be redundant.
 
 ```r
 m4 <- bam(semitone.norm ~ cat +
@@ -343,6 +344,7 @@ summary(m4)
 
 <img src="/docs/m4_summary.png" alt="m4_summary" width="55%">
 
+The summary shows a significant effect of **s(speaker, cat)**, supporting the inclusion of the random slope.
 
 ## Step 5: Include non-linear random effects
 ```r
