@@ -523,7 +523,7 @@ m.full.predictions %>%
 
 This figure provides the predicted F0 trajectory by each syntactic category for speakers of American English and Hong Kong English.
 Hong Kong English speakers produced the content words with a significantly higher F0 throughout the entire sonorant duration than the function words.
-The 95% confidence interval of the content words did not overlap with that of the function words.
+For them, the 95% confidence interval of the content words did not overlap with that of the function words.
 Conversely, no clear patterns of pitch contour were observed for the American English group as the F0 stayed relatively constant throughout the sonorant duration regardless of syntactic category.
 There is a complete overlap of the 95% confidence intervals of the predicted F0 contours of content words and function words. 
 
