@@ -483,7 +483,7 @@ summary(m.full)
 
 To account for the relationship between measurements taken at consecutive time points, an autoregressive error term was included.
 An AR1 model was incorporated to account for autocorrelation of residuals.
-The model was calculated using a scaled-t distribution to correct for non-normality of the model residuals as indicated by mgcv::gam.check().
+The model was calculated using a scaled-t distribution to correct for non-normality of the model residuals.
 
 You may save the full model to your computer using the `saveRDS()` function so that you don't have to wait every time you run the script.
 The model output will be saved as an .rds file. 
@@ -522,7 +522,10 @@ m.full.predictions %>%
 <img src="/docs/gamm_result.png" alt="gamm_result">
 
 This figure provides the predicted F0 trajectory by each syntactic category for speakers of American English and Hong Kong English.
-HKE speakers produced the content words with a significantly higher F0 throughout the entire sonorant duration than the function words. As shown in Figure 1, the 95% confidence interval of the content words did not overlap with that of the function words.
+Hong Kong English speakers produced the content words with a significantly higher F0 throughout the entire sonorant duration than the function words.
+The 95% confidence interval of the content words did not overlap with that of the function words.
+Conversely, no clear patterns of pitch contour were observed for the American English group as the F0 stayed relatively constant throughout the sonorant duration regardless of syntactic category.
+There is a complete overlap of the 95% confidence intervals of the predicted F0 contours of content words and function words. 
 
 ```r
 m.full %>%
@@ -551,9 +554,11 @@ diff %>%
 
 <img src="/docs/gamm_diff.png" alt="gamm_diff">
 
-Figure 2 demonstrates the significance of the difference in F0 between the two syntactic categories for each variety.
-Likewise, Figure 2 indicates a significant difference in F0 throughout the whole sonorant duration.
-Conversely, no clear patterns of pitch contour were observed for the AE group as the F0 stayed relatively constant throughout the sonorant duration regardless of syntactic category. As shown in Figure 2, although the function words had a slightly lower F0 than the content words, the difference was not significant. It is also shown in Figure 1 by the complete overlap of the 95% confidence intervals of the predicted F0 contours of content words and function words. Therefore, there was no significant effect of syntactic category on the dynamic F0 of AE speakers. Furthermore, the confidence intervals for each syntactic category in the AE group were wider than those of the HKE group, which indicates that AE speakers produced the target words with greater variability in F0. In sum, the results of GAMMs indicate that speakers of HKE and AE differed in their F0 production of monosyllabic content and function words. Throughout the sonorant duration, HKE speakers produced the content words with a significantly higher F0 than function words, while no effect of syntactic category was found for AE speakers.
+This figure on the other hand demonstrates the significance of the difference in F0 between the two syntactic categories for each variety.
+It also indicates a significant difference in F0 throughout the whole sonorant duration for Hong Kong English but not American English.
+Furthermore, the confidence intervals for each syntactic category in the American English group were wider than those of the Hong Kong English group, which indicates that American English speakers produced the target words with greater variability in F0.
+In sum, the results of GAMMs indicate that speakers of Hong Kong English and American English differed in their F0 production of monosyllabic content and function words.
+Throughout the sonorant duration, Hong Kong English speakers produced the content words with a significantly higher F0 than function words, while no effect of syntactic category was found for American English speakers.
 
 
 
