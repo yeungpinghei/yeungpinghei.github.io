@@ -344,9 +344,19 @@ summary(m4)
 
 <img src="/docs/m4_summary.png" alt="m4_summary" width="55%">
 
-The summary shows a significant effect of **s(speaker, cat)**, supporting the inclusion of the random slope.
+The model summary shows a significant effect of **s(speaker, cat)**, supporting the inclusion of the random slope.
 
 ## Step 5: Include non-linear random effects
+Although we have added random intercepts and random slopes to our model, we still haven't accounted for the **non-linear** random effects of speakers on normalized F0 **over time**.
+Thus, we should replace the random slope `s(speaker, cat, bs="re")` with the smooth specification `s(point, speaker, by=cat, bs="fs",m=1)`.
+The random intercept for speakers is dropped because the difference is incorporated by the non-centered factor smooth.
+The first parameter `point` represents the non-linear difference over time while the second parameter `speaker` refers to the general time pattern for each individual speakers.
+`by=cat` allows for individual variability in the effect of syntactic category.
+The parameter `bs` is now set to "fs", indicating that it is a factor smooth.
+The final parameter, `m`, indicates the order of the non-linearity penalty.
+
+Note: The code may take some time to run since the model is getting more complex.
+
 ```r
 m5 <- bam(semitone.norm ~ cat +
                 s(word, bs="re") +
@@ -355,14 +365,8 @@ m5 <- bam(semitone.norm ~ cat +
 summary(m5)
 ```
 <img src="/docs/m5_summary.png" alt="m5_summary" width="50%">
-
-It may start to take more time to run the code since the model is getting more complex.
-
-The smooth specification `s(point, speaker, by=cat, bs="fs",m=1)` replaces the random intercept `s(speaker, bs="re")`.
-The factor smooth `("fs")` models non-linear difference over time (the first parameter) with respect to the general time pattern for each of the speakers (the second parameter: the random-effect factor)
-The final parameter, `m`, indicates the order of the non-linearity penalty.
-`by=cat` allows for individual variability in the effect of syntactic category.
-Random intercepts for speakers and words are dropped because the difference is incorporated by the non-centered factor smooth
+According to the model summary, both factor smooths *'s(point, speaker):catcontent'* and *'s(point, speaker):catcontent'* have a significant p-value of <2e-16.
+Thus, it is necessary to include them in our model.
 
 ## Step 6: Account for autocorrelation in the residuals
 ```r
