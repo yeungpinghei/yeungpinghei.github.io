@@ -419,10 +419,11 @@ Using the `interaction()` function, we may create new a column in the data frame
 ```r
 # Combine the two variables
 data$cat.variety <- interaction(data$cat, data$variety)
+```
 
 Then, we can make it the independent variable instead of `cat`.
 We can also add a new factor smooth `s(point, word, by=variety, bs="fs", m=1)`, which models variety-specific differences in the articulation of individual words.
-
+```r
 # It takes a while to load...
 m8 <- bam(semitone.norm ~ cat.variety +
             te(point, repetition, k=3) +
