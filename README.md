@@ -365,6 +365,7 @@ m5 <- bam(semitone.norm ~ cat +
 summary(m5)
 ```
 <img src="/docs/m5_summary.png" alt="m5_summary" width="50%">
+
 According to the model summary, both factor smooths *'s(point, speaker):catcontent'* and *'s(point, speaker):catcontent'* have a significant p-value of <2e-16.
 Thus, it is necessary to include them in our model.
 
@@ -424,21 +425,22 @@ summary(m8)
 <img src="/docs/m8_summary.png" alt="m8_summary" width="50%">
 
 ## Step 9: Final model
-`discrete` and `nthreads` helps you to speed up the calculation
+The dependent variable was the normalized F0 `semitone.norm`.
+The independent variable was the interaction of English variety and syntactic category `cat.variety`.
+The reference level of this interaction term was content word by AE speakers.
+The interaction was included as a parametric effect and as a smooth `s(point, by = cat.variety, k=9)` in the model.
+The smooth included time `point` to indicate the normalized time point of the measurements.
+The smoothing term `s(point, k=9)` models the non-linear F0 values over time.
+The parametric effects of duration `s(duration)` and repetition `s(repetition, k=3)`, as well as their fixed interactions with time `ti(point, duration, k=9)` and `ti(point, repetition, k=3)` were included to model their influence on F0.
+The difference smooth `s(point, by = adjacent, k=9)` accounted for the non-linear effect of adjacent segments.
+Random effect structure was also included in the model.
+`speaker` was included as a random intercept and slope interacting with `cat` to model the variable effect of syntactic category on individual speakers.
+`word` was included as a random intercept and slope interacting with `variety` to model variety-specific differences in the articulation of individual words.
+
+Since the model is very complex, we need to find ways to speed up the calculation.
+It can be done by using `discrete` and `nthreads`.
 `discrete` reduces computation time by taking advantage of the fact that numerical predictors often only have a modest number of unique (rounded) values.
 `nthreads` speeds up the computation by using multiple processors in parallel to obtain the model fit.
-
-Remeber to save the full model because we don't want to wait every time we run the script.
-```r
-# Save the full model because we don't want to wait every time we run the script
-saveRDS(m.full, file = "gamm_result.rds")
-```
-
-```r
-# Load the saved GAMM results to save your time
-m.full <- readRDS("gamm_result.rds")
-```
-
 
 ```r
 m.full.noar <- bam(semitone.norm ~ cat.variety +
@@ -459,6 +461,10 @@ m.full.noar <- bam(semitone.norm ~ cat.variety +
 summary(m.full.noar)
 ```
 
+To account for the relationship between measurements taken at consecutive time points, an autoregressive error term was included.
+An AR1 model was incorporated to account for autocorrelation of residuals.
+The model was calculated using a scaled-t distribution to correct for non-normality of the model residuals as indicated by mgcv::gam.check().
+
 ```r
 m.full.acf <- acf_resid(m.full.noar)
 m.full <- bam(semitone.norm ~ cat.variety +
@@ -478,9 +484,24 @@ m.full <- bam(semitone.norm ~ cat.variety +
               data = data
 summary(m.full)
 ```
+
+You may save the full model to your computer using the `saveRDS()` function so that you don't have to wait every time you run the script.
+The model output will be saved as an .rds file. 
+```r
+# Save the full model because we don't want to wait every time we run the script
+saveRDS(m.full, file = "gamm_result.rds")
+```
+To import the GAMM output that you saved to RStudio, use the `readRDS()` function.
+```r
+# Load the saved GAMM results to save your time
+m.full <- readRDS("gamm_result.rds")
+```
+
 <img src="/docs/m9_summary.png" alt="m9_summary" width="60%">
 
 ## Step 10: Visualize the output of the final GAMM
+Here I used the same codes as in Step 2 to visualize the output of my final GAMM.
+
 ```r
 m.full.predictions <- m.full %>%
   get_predictions(cond = list(cat.variety = c("content.AE","function.AE","content.HKE","function.HKE"), point=seq(1,9,0.1))) %>%
@@ -499,6 +520,9 @@ m.full.predictions %>%
 ```
 
 <img src="/docs/gamm_result.png" alt="gamm_result">
+
+This figure provides the predicted F0 trajectory by each syntactic category for speakers of American English and Hong Kong English.
+HKE speakers produced the content words with a significantly higher F0 throughout the entire sonorant duration than the function words. As shown in Figure 1, the 95% confidence interval of the content words did not overlap with that of the function words.
 
 ```r
 m.full %>%
@@ -526,6 +550,12 @@ diff %>%
 ```
 
 <img src="/docs/gamm_diff.png" alt="gamm_diff">
+
+Figure 2 demonstrates the significance of the difference in F0 between the two syntactic categories for each variety.
+Likewise, Figure 2 indicates a significant difference in F0 throughout the whole sonorant duration.
+Conversely, no clear patterns of pitch contour were observed for the AE group as the F0 stayed relatively constant throughout the sonorant duration regardless of syntactic category. As shown in Figure 2, although the function words had a slightly lower F0 than the content words, the difference was not significant. It is also shown in Figure 1 by the complete overlap of the 95% confidence intervals of the predicted F0 contours of content words and function words. Therefore, there was no significant effect of syntactic category on the dynamic F0 of AE speakers. Furthermore, the confidence intervals for each syntactic category in the AE group were wider than those of the HKE group, which indicates that AE speakers produced the target words with greater variability in F0. In sum, the results of GAMMs indicate that speakers of HKE and AE differed in their F0 production of monosyllabic content and function words. Throughout the sonorant duration, HKE speakers produced the content words with a significantly higher F0 than function words, while no effect of syntactic category was found for AE speakers.
+
+
 
 ## References
 Carignan, C., Hoole, P., Kunay, E., Pouplier, M., Joseph, A., Voit, D., Frahm, J., & Harrington, J. (2020). Analyzing speech in both time and space: Generalized additive mixed models can uncover systematic patterns of variation in vocal tract shape in real-time MRI. *Laboratory Phonology: Journal of the Association for Laboratory Phonology, 11*(1), 2. <a href="https://doi.org/10.5334/labphon.214">https://doi.org/10.5334/labphon.214</a>
