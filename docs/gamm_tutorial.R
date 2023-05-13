@@ -113,7 +113,9 @@ m3 <- bam(semitone.norm ~ cat +
               data=data)
 summary(m3)
 # Model comparison
-compareML(m2,m3)
+m2.ml <- bam(semitone.norm ~ cat + s(point, by=cat,bs="tp", k=9), data=data, method="ML")
+m3.ml <- bam(semitone.norm ~ cat + s(point, by=cat, k=9) + s(speaker,bs="re") + s(word, bs="re"), data=data, method="ML")
+compareML(m2.ml,m3.ml)
 # The model with a lower AIC is better
 
 #### STEP 4: Include by-speaker random slopes ####
