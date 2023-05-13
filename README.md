@@ -287,6 +287,9 @@ m2.diff %>%
 ![m2.diff](/docs/m2.diff.png)
 
 ## Step 3: Include random intercepts for speakers and words
+Then, we want to account for the random effects of individual speakers and words.
+To do so, we may add the random-effect smooths of `s(speaker,bs="re")` and `s(word, bs="re")`.
+The first parameter is the random-effect factor, which is interpreted as a random intercept.
 ```r
 m3 <- bam(semitone.norm ~ cat +
                 s(point, by=cat, k=9) +
@@ -297,21 +300,38 @@ summary(m3)
 ```
 <img src="/docs/m3_summary.png" alt="m3_summary" width="50%">
 
+The p-values of **s(speaker)** and **s(word)** in the model summary tell us whether the random intercepts are necessary.
+In this case, since the p-values are both significant (p<2e-16), we should keep these two random intercepts.
+
+To figure out whether we should include the random intercepts, we may also compare models with and without them using the `compareML()` function from the *itsadug* package.
+It uses the Akaike Information Criterion (AIC) to compare the goodness of fit of the two models while taking into account the complexity of the models.
+To use this function, the models must have the same fixed effects.
+Or else, the maximum likelihood (ML) estimation method should be used instead.
+Therefore, in order to compare `m2` and `m3`, we have to refit them using ML.
+
+```r
+m2.ml <- bam(semitone.norm ~ cat + s(point, by=cat,bs="tp", k=9), data=data, method="ML")
+m3.ml <- bam(semitone.norm ~ cat + s(point, by=cat, k=9) + s(speaker,bs="re") + s(word, bs="re"), data=data, method="ML")
+```
+Then, we can compre the models:
 ```r
 # Model comparison
-compareML(m2,m3)
+compareML(m2.ml,m3.ml)
 ```
 <img src="/docs/m2_m3_compare.png" alt="compare" width="50%">
 
-The model with a lower AIC is better.
+The results show that the model `m3.ml` is better since it has a lower AIC score.
+Therefore, it is better for us to include the random intercepts.
+
+## Step 4: Include by-speaker random slopes
 
 **Question**: What is the difference between random intercepts and random slopes?
 
-Some speakers or words will on average have a higher F0 than others, and this structural variability is captured by a by-speaker or by-word random intercepts.
+Some speakers or words will on average have a higher F0 than others, and this structural variability is captured by a by-speaker or by-word **random intercepts**.
 On the other hand, the exact difference in F0 between content and function words may vary per speaker. 
-Random slopes allow the influence of a predictor to vary for each level of the random-effect factor.
+**Random slopes** allow the influence of a predictor to vary for each level of the random-effect factor.
 
-## Step 4: Include by-speaker random slopes
+
 ```r
 m4 <- bam(semitone.norm ~ cat +
                 s(point, by=cat, k=9) +
