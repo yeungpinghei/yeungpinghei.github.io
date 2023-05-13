@@ -425,23 +425,6 @@ summary(m8)
 <img src="/docs/m8_summary.png" alt="m8_summary" width="50%">
 
 ## Step 9: Final model
-The dependent variable was the normalized F0 `semitone.norm`.
-The independent variable was the interaction of English variety and syntactic category `cat.variety`.
-The reference level of this interaction term was content word by AE speakers.
-The interaction was included as a parametric effect and as a smooth `s(point, by = cat.variety, k=9)` in the model.
-The smooth included time `point` to indicate the normalized time point of the measurements.
-The smoothing term `s(point, k=9)` models the non-linear F0 values over time.
-The parametric effects of duration `s(duration)` and repetition `s(repetition, k=3)`, as well as their fixed interactions with time `ti(point, duration, k=9)` and `ti(point, repetition, k=3)` were included to model their influence on F0.
-The difference smooth `s(point, by = adjacent, k=9)` accounted for the non-linear effect of adjacent segments.
-Random effect structure was also included in the model.
-`speaker` was included as a random intercept and slope interacting with `cat` to model the variable effect of syntactic category on individual speakers.
-`word` was included as a random intercept and slope interacting with `variety` to model variety-specific differences in the articulation of individual words.
-
-Since the model is very complex, we need to find ways to speed up the calculation.
-It can be done by using `discrete` and `nthreads`.
-`discrete` reduces computation time by taking advantage of the fact that numerical predictors often only have a modest number of unique (rounded) values.
-`nthreads` speeds up the computation by using multiple processors in parallel to obtain the model fit.
-
 ```r
 m.full.noar <- bam(semitone.norm ~ cat.variety +
                      s(point, k=9) +
@@ -461,9 +444,22 @@ m.full.noar <- bam(semitone.norm ~ cat.variety +
 summary(m.full.noar)
 ```
 
-To account for the relationship between measurements taken at consecutive time points, an autoregressive error term was included.
-An AR1 model was incorporated to account for autocorrelation of residuals.
-The model was calculated using a scaled-t distribution to correct for non-normality of the model residuals as indicated by mgcv::gam.check().
+The dependent variable was the normalized F0 `semitone.norm`.
+The independent variable was the interaction of English variety and syntactic category `cat.variety`.
+The reference level of this interaction term was content word by AE speakers.
+The interaction was included as a parametric effect and as a smooth `s(point, by = cat.variety, k=9)` in the model.
+The smooth included time `point` to indicate the normalized time point of the measurements.
+The smoothing term `s(point, k=9)` models the non-linear F0 values over time.
+The parametric effects of duration `s(duration)` and repetition `s(repetition, k=3)`, as well as their fixed interactions with time `ti(point, duration, k=9)` and `ti(point, repetition, k=3)` were included to model their influence on F0.
+The difference smooth `s(point, by = adjacent, k=9)` accounted for the non-linear effect of adjacent segments.
+Random effect structure was also included in the model.
+`speaker` was included as a random intercept and slope interacting with `cat` to model the variable effect of syntactic category on individual speakers.
+`word` was included as a random intercept and slope interacting with `variety` to model variety-specific differences in the articulation of individual words.
+
+Since the model is very complex, we need to find ways to speed up the calculation.
+It can be done by using `discrete` and `nthreads`.
+`discrete` reduces computation time by taking advantage of the fact that numerical predictors often only have a modest number of unique (rounded) values.
+`nthreads` speeds up the computation by using multiple processors in parallel to obtain the model fit.
 
 ```r
 m.full.acf <- acf_resid(m.full.noar)
@@ -484,6 +480,10 @@ m.full <- bam(semitone.norm ~ cat.variety +
               data = data
 summary(m.full)
 ```
+
+To account for the relationship between measurements taken at consecutive time points, an autoregressive error term was included.
+An AR1 model was incorporated to account for autocorrelation of residuals.
+The model was calculated using a scaled-t distribution to correct for non-normality of the model residuals as indicated by mgcv::gam.check().
 
 You may save the full model to your computer using the `saveRDS()` function so that you don't have to wait every time you run the script.
 The model output will be saved as an .rds file. 
