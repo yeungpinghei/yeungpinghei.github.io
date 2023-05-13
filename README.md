@@ -348,12 +348,13 @@ The model summary shows a significant effect of **s(speaker, cat)**, supporting 
 
 ## Step 5: Include non-linear random effects
 Although we have added random intercepts and random slopes to our model, we still haven't accounted for the **non-linear** random effects of speakers on normalized F0 **over time**.
-Thus, we should replace the random slope `s(speaker, cat, bs="re")` with the smooth specification `s(point, speaker, by=cat, bs="fs",m=1)`.
+Thus, we should replace the random slope `s(speaker, cat, bs="re")` with the smooth specification `s(point, speaker, by=cat, bs="fs",m=1)`, which allows us to model the variable effect of syntactic category on individual speakers over time.
 The random intercept for speakers is dropped because the difference is incorporated by the non-centered factor smooth.
 The first parameter `point` represents the non-linear difference over time while the second parameter `speaker` refers to the general time pattern for each individual speakers.
 `by=cat` allows for individual variability in the effect of syntactic category.
 The parameter `bs` is now set to "fs", indicating that it is a factor smooth.
 The final parameter, `m`, indicates the order of the non-linearity penalty.
+ 
 
 Note: The code may take some time to run since the model is getting more complex.
 
@@ -367,7 +368,7 @@ summary(m5)
 <img src="/docs/m5_summary.png" alt="m5_summary" width="50%">
 
 According to the model summary, both factor smooths *'s(point, speaker):catcontent'* and *'s(point, speaker):catcontent'* have a significant p-value of <2e-16.
-Thus, it is necessary to include them in our model.
+Thus, it is necessary to include them in our model.model 
 
 ## Step 6: Account for autocorrelation in the residuals
 ```r
@@ -410,9 +411,18 @@ summary(m7)
 <img src="/docs/m7_summary.png" alt="m7_summary" width="50%">
 
 ## Step 8: Compare Hong Kong English and American English
+So far we have considered the effect of syntactic category on normalized F0, but we have yet to explore if it affects speakers of Hong Kong English and American English equally.
+One may be tempted to construct two separate models for Hong Kong English and American English, but it is not an ideal appraoch.
+If we fit two separate models, we would not be able to evaluate whether the addition of English variety is warranted.
+While a visual comparison may give us the impression that the two patterns are different, the difference between them may not be significantly different.
+Using the `interaction()` function, we may create new a column in the data frame, an interaction between syntactic category and English variety.
 ```r
 # Combine the two variables
 data$cat.variety <- interaction(data$cat, data$variety)
+
+Then, we can make it the independent variable instead of `cat`.
+We can also add a new factor smooth `s(point, word, by=variety, bs="fs", m=1)`, which models variety-specific differences in the articulation of individual words.
+
 # It takes a while to load...
 m8 <- bam(semitone.norm ~ cat.variety +
             te(point, repetition, k=3) +
@@ -423,6 +433,8 @@ summary(m8)
 ```
 
 <img src="/docs/m8_summary.png" alt="m8_summary" width="50%">
+
+With content words produced by American English speakers as the baseline,the model summary shows that speakers of Hong Kong English had a significantly higher F0 for content words and a significantly lower F0 for function words, while speakers of American English did not produce significant differences in F0 for these two syntactic categories.
 
 ## Step 9: Final model
 ```r
@@ -446,7 +458,7 @@ summary(m.full.noar)
 
 The dependent variable was the normalized F0 `semitone.norm`.
 The independent variable was the interaction of English variety and syntactic category `cat.variety`.
-The reference level of this interaction term was content word by AE speakers.
+The reference level of this interaction term was content word by American English speakers.
 The interaction was included as a parametric effect and as a smooth `s(point, by = cat.variety, k=9)` in the model.
 The smooth included time `point` to indicate the normalized time point of the measurements.
 The smoothing term `s(point, k=9)` models the non-linear F0 values over time.
