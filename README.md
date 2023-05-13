@@ -557,6 +557,7 @@ diff %>%
 This figure on the other hand demonstrates the significance of the difference in F0 between the two syntactic categories for each variety.
 It also indicates a significant difference in F0 throughout the whole sonorant duration for Hong Kong English but not American English.
 Furthermore, the confidence intervals for each syntactic category in the American English group were wider than those of the Hong Kong English group, which indicates that American English speakers produced the target words with greater variability in F0.
+
 In sum, the results of GAMMs indicate that speakers of Hong Kong English and American English differed in their F0 production of monosyllabic content and function words.
 Throughout the sonorant duration, Hong Kong English speakers produced the content words with a significantly higher F0 than function words, while no effect of syntactic category was found for American English speakers.
 
