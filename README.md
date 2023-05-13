@@ -371,14 +371,35 @@ According to the model summary, both factor smooths *'s(point, speaker):catconte
 Thus, it is necessary to include them in our model.model 
 
 ## Step 6: Account for autocorrelation in the residuals
+As we are analyzing time-series data, we should be aware of autocorrelation in the residuals.
+It refers to the degree to which the differences between the actual values and the predicted values in a time series are correlated with one another over time.
+Specifically, autocorrelation occurs when the residuals at one point in time are correlated with the residuals at another point in time.
+Using the `acf_resid` function from the *itsadug* package, we can generate a autocorrelation graph to check the degree of autocorrelation in our model.
 ```r
 m5.acf <- acf_resid(m5)
+```
+<img src="/docs/acf_resid.png" alt="acf_resid">
+
+The first vertical line in the graph is always at height 1, meaning that each point has a correlation of 1 with itself.
+The second line shows the amount of autocorrelation present when comparing measurements at time *t-1* and time *t*.
+The value is very low at around 0 in this model, meaning that each additional time point yields a lot of additional information.
+However, if the amount of autocorrelation is high, we should incorporate an AR(1) error model for the residuals.
+It is important to note that autocorrelation can only be assessed adequately if the dataset is order.
+Hence, for each individual token (speaker + word + repetition), the rows have to be ordered by increasing time.
+Each separate time series in the dataset should be positioned one after another.
+To do so, we may use the function below to create a new column in the dataset that indicates whether an F0 measurement is the first one within the token.
+
+```r
 data <- data %>%
   arrange(speaker, word, repetition, point) %>%
   group_by(speaker, word, repetition) %>%
   mutate(start.event = case_when(point == min(point) ~ TRUE, TRUE ~ FALSE), .after = point)
 ```
-<img src="/docs/acf_resid.png" alt="acf_resid">
+
+Then, we can incorporate an AR(1) error model for the residuals into our GAMM with `rho=m5.acf[2], AR.start=data$start.event`.
+The first parameter added is `rho`, which is an estimate of the amount of autocorrelation.
+Using the height of the second line in the autocorrelation graph *[2]* is generally a good estimate.
+The second parameter added is `AR.start`, which should be the new column we just created in the dataset.
 
 ```r
 m6 <- bam(semitone.norm ~ cat +
@@ -389,11 +410,6 @@ m6 <- bam(semitone.norm ~ cat +
 summary(m6)
 ```
 <img src="/docs/m6_summary.png" alt="m6_summary" width="50%">
-
-```r
-compareML(m5,m6)
-```
-<img src="/docs/m5_m6_compare.png" alt="compare" width="60%">
 
 ## Step 7: Include two-dimensional interaction
 Interaction of two numerical predictors: time and repetition
