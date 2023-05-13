@@ -434,7 +434,7 @@ summary(m8)
 
 <img src="/docs/m8_summary.png" alt="m8_summary" width="50%">
 
-With content words produced by American English speakers as the baseline, the model summary shows that speakers of Hong Kong English had a significantly higher F0 for content words and a significantly lower F0 for function words, while speakers of American English did not produce significant differences in F0 for these two syntactic categories.
+With content words produced by American English speakers as the baseline, the model summary shows that speakers of Hong Kong English had a significantly higher F0 for content words (p=0.0344) and a significantly lower F0 for function words (p=0.0106), while speakers of American English did not produce significant differences in F0 for these two syntactic categories (p=0.6780).
 
 ## Step 9: Final model
 ```r
