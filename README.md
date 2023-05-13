@@ -368,7 +368,7 @@ summary(m5)
 <img src="/docs/m5_summary.png" alt="m5_summary" width="50%">
 
 According to the model summary, both factor smooths *'s(point, speaker):catcontent'* and *'s(point, speaker):catcontent'* have a significant p-value of <2e-16.
-Thus, it is necessary to include them in our model.model 
+Thus, it is necessary to include them in our model.
 
 ## Step 6: Account for autocorrelation in the residuals
 As we are analyzing time-series data, we should be aware of autocorrelation in the residuals.
@@ -384,7 +384,7 @@ The first vertical line in the graph is always at height 1, meaning that each po
 The second line shows the amount of autocorrelation present when comparing measurements at time *t-1* and time *t*.
 The value is very low at around 0 in this model, meaning that each additional time point yields a lot of additional information.
 However, if the amount of autocorrelation is high, we should incorporate an AR(1) error model for the residuals.
-It is important to note that autocorrelation can only be assessed adequately if the dataset is order.
+It is important to note that autocorrelation can only be assessed adequately if the dataset is ordered.
 Hence, for each individual token (speaker + word + repetition), the rows have to be ordered by increasing time.
 Each separate time series in the dataset should be positioned one after another.
 To do so, we may use the function below to create a new column in the dataset that indicates whether an F0 measurement is the first one within the token.
@@ -396,7 +396,7 @@ data <- data %>%
   mutate(start.event = case_when(point == min(point) ~ TRUE, TRUE ~ FALSE), .after = point)
 ```
 
-Then, we can incorporate an AR(1) error model for the residuals into our GAMM with `rho=m5.acf[2], AR.start=data$start.event`.
+Then, we can incorporate an AR(1) error model for the residuals into our model specification with `rho=m5.acf[2], AR.start=data$start.event`.
 The first parameter added is `rho`, which is an estimate of the amount of autocorrelation.
 Using the height of the second line in the autocorrelation graph *[2]* is generally a good estimate.
 The second parameter added is `AR.start`, which should be the new column we just created in the dataset.
@@ -412,8 +412,12 @@ summary(m6)
 <img src="/docs/m6_summary.png" alt="m6_summary" width="50%">
 
 ## Step 7: Include two-dimensional interaction
-Interaction of two numerical predictors: time and repetition
-Since the predictors are not on the same scale, a tensor product smooth interaction is used.
+Using two-dimensional non-linear interactions, we can incorporate interactions that involve two numerical predictors like the one between time and repetition.
+Since the predictors `point` and `repetition` are not on the same scale (there are 9 possible values of `point` but 3 possible values of `repetition`), a tensor product smooth interaction should be used.
+A tensor product models a non-linear interaction by allowing the coefficients underlying the smooth for one variable to vary non-linearly depending on the value of the other variable.
+Using the `te` function, a tensor product `te(point, repetition, k=3)` can be included in our model specification.
+By default, the *te*-constructor uses two 5-dimensional cubic regression splines (bs="cr") and hence the k-parameter is set to 5.
+However, since there are only 3 possible values of repetition, we would set k to 3 instead.
 
 ```r
 m7 <- bam(semitone.norm ~ cat +
@@ -425,6 +429,9 @@ summary(m7)
 ```
 
 <img src="/docs/m7_summary.png" alt="m7_summary" width="50%">
+
+According to the model summary, the two-dimensional interaction between time and repetition *'te(point, repetition)'* has a significant p-value of <2e-16.
+Thus, it is beneficial to include it in our model.
 
 ## Step 8: Compare Hong Kong English and American English
 So far we have considered the effect of syntactic category on normalized F0, but we have yet to explore if it affects speakers of Hong Kong English and American English equally.
